@@ -34,7 +34,7 @@ public class NewUser {
     @NotBlank
     private String country;
     
-    @NotBlank
+    
     private Date birthdate;
     
     private String image;

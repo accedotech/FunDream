@@ -1,0 +1,44 @@
+.register {
+    width: 30%;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.campos_input {
+    margin: 7%;
+    width: 100%;
+}
+
+.login_buttons {
+    text-align: center;
+}
+
+.show_password {
+    padding: 0%;
+    margin: 0%;
+    height: 35px;
+}
+
+.input_Email {
+    width: 300px !important;
+    height: 35px;
+    border-radius: 0%;
+    border: 1px solid #A6A6A6 !important;
+}
+
+.input_Password {
+    width: 267px !important;
+    height: 35px;
+    border-radius: 0%;
+    border: 1px solid #A6A6A6 !important;
+}
+
+.ui-inputgroup-addon {
+    border: 1px solid #A6A6A6 !important;
+}
+
+
+.campos_input p-message {
+    margin-top: 2%;
+}

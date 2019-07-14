@@ -1,0 +1,175 @@
+<div class="register">
+<p-panel>
+    <p-header>
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <label><strong> Crear cuenta </strong></label>        
+    </p-header>
+
+  <form [formGroup]="form">
+
+      <div class="p-grid">
+      <div class="p-col">
+        <!-- First name -->
+        <div class="campos_input">
+          <div class="">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+            <span class="ui-float-label">
+              <input type="text" pInputText autocomplete="off" formControlName="firstName" (keypress)="omitKeys($event)" class="inputs">
+              <label for="float-input">Prime nombre</label>
+            </span>
+          </div>
+        </div>
+          <div *ngIf="!!validateErrorsForm.firstName.touched && !!validateErrorsForm.firstName.errors" style="margin-top: 1%">
+              <p-message severity="error" text="El primer nombre es requerido" *ngIf="!!validateErrorsForm.firstName.errors.required"></p-message>
+              <p-message severity="error" text="Error, caracteres invalidos" *ngIf="!!validateErrorsForm.firstName.errors.pattern"></p-message>            
+          </div>          
+        </div>
+      </div>
+
+      <div class="p-col">
+        <!-- Second name -->
+        <div class="campos_input">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+            <span class="ui-float-label">
+              <input type="text" pInputText autocomplete="off" formControlName="secondName" (keypress)="omitKeys($event)" class="inputs">
+              <label for="float-input">Segundo nombre</label>
+            </span>
+          </div>
+
+          <div *ngIf="!!validateErrorsForm.secondName.touched && !!validateErrorsForm.secondName.errors" style="margin-top: 1%">              
+              <p-message severity="error" text="Error, caracteres invalidos" *ngIf="!!validateErrorsForm.secondName.errors.pattern"></p-message>            
+          </div>  
+    </div>
+  </div>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col">
+    <!-- first last name -->
+    <div class="campos_input">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+        <span class="ui-float-label">
+          <input type="text" pInputText autocomplete="off" formControlName="firstLastName" (keypress)="omitKeys($event)" class="inputs">
+          <label for="float-input">Primer apellido</label>
+        </span>
+      </div>
+
+      <div *ngIf="!!validateErrorsForm.firstLastName.touched && !!validateErrorsForm.firstLastName.errors" style="margin-top: 1%">
+          <p-message severity="error" text="El primer apellido es requerido" *ngIf="!!validateErrorsForm.firstLastName.errors.required"></p-message>
+          <p-message severity="error" text="Error, caracteres invalidos" *ngIf="!!validateErrorsForm.firstLastName.errors.pattern"></p-message>            
+      </div>         
+    </div>
+  </div>
+
+  <div class="p-col">
+    <!-- second last name -->
+    <div class="campos_input">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+        <span class="ui-float-label">
+          <input type="text" pInputText autocomplete="off" formControlName="secondLastName"  (keypress)="omitKeys($event)" class="inputs">
+          <label for="float-input">Segundo apellido</label>
+        </span>
+      </div>
+
+      <div *ngIf="!!validateErrorsForm.secondLastName.touched && !!validateErrorsForm.secondLastName.errors" style="margin-top: 1%">              
+          <p-message severity="error" text="Error, caracteres invalidos" *ngIf="!!validateErrorsForm.secondLastName.errors.pattern"></p-message>            
+      </div>  
+
+    </div>
+  </div>  
+  </div>
+   
+  <div class="p-grid">
+    <div class="p-col">
+    <!-- Country -->
+    <div class="campos_input">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"> <i class="fa fa-globe" aria-hidden="true"></i> </span>
+        <span class="ui-float-label">
+          <p-dropdown  [options]="countries" placeholder=" " [filter]="true" formControlName="country" autowidth="false"
+            [style]="{'width': '100%',  'height': '35px', 'border-radius': '0',  'border': '1px solid #A6A6A6'}">
+          </p-dropdown>
+          <label for="float-input">País de origen</label>
+        </span>
+      </div>
+
+      <div *ngIf="!!validateErrorsForm.country.touched && !!validateErrorsForm.country.errors" style="margin-top: 1%">              
+          <p-message severity="error" text="Selecciones su país de origen" *ngIf="!!validateErrorsForm.country.errors.required"></p-message>            
+      </div>  
+
+      
+    </div>
+    </div>
+
+    
+      <div class="p-col">
+    <!-- Birthdate -->
+    <div class="campos_input">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"> <i class="fa fa-calendar" aria-hidden="true"></i> </span>
+        <span class="ui-float-label">
+          <p-calendar [yearNavigator]="true" [monthNavigator]="true" formControlName="birthdate"
+            [locale]="spanishCalendar" dateFormat="dd/mm/yy" yearRange="1900:2019" placeholder=" "
+            styleClass="calendar"> </p-calendar>
+          <label for="float-input">Fecha de nacimiento</label>
+        </span>
+      </div>     
+
+      <div *ngIf="!!validateErrorsForm.birthdate.touched && !!validateErrorsForm.birthdate.errors" style="margin-top: 1%">              
+          <p-message severity="error" text="Selecciones fecha de nacimiento" *ngIf="!!validateErrorsForm.birthdate.errors.required"></p-message>            
+      </div> 
+
+    </div>
+    </div>
+  </div>
+    
+     <!-- Email -->
+     <div class="campos_input2">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+          <span class="ui-float-label">
+            <input type="email" pInputText autocomplete="off" formControlName="email" (keypress)="omitKeys($event)" class="input_Email">
+            <label for="float-input">Email</label>
+          </span>
+        </div>
+         
+        <div *ngIf="!!validateErrorsForm.email.touched && !!validateErrorsForm.email.errors" style="margin-top: 1%">
+            <p-message severity="error" text="Ingrese su dirección de correo electronico" *ngIf="!!validateErrorsForm.email.errors.required"></p-message>
+            <p-message severity="error" text="Ingrese una dirección de correo valida" *ngIf="!!validateErrorsForm.email.errors.email"></p-message>            
+        </div>   
+  
+      </div>
+    
+      <!-- Password -->
+      <div class="campos_input2">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+          <span class="ui-float-label">
+            <input type="{{this.inputPasswordType}}" pInputText autocomplete="off" formControlName="password" class="input_Password">                                      
+            <label for="float-input">Contraseña</label>
+            <button pButton type="button" icon="fa fa-eye" class="show_password" (click)="showPassword()" *ngIf="this.showPasswordButton" ></button>
+            <button pButton type="button" icon="fa fa-eye-slash" class="show_password" (click)="showPassword()" *ngIf="!this.showPasswordButton" ></button>
+          </span>                                
+        </div>
+           
+        <div *ngIf="!!validateErrorsForm.password.touched && !!validateErrorsForm.password.errors" style="margin-top: 1%">
+            <p-message severity="error" text="Por favor ingrese una contraseña valida" *ngIf="!!validateErrorsForm.password.errors.required"></p-message>                                    
+        </div>     
+      </div>
+    
+
+  </form>
+
+  
+  <p-messages [(value)]="errorMessage"></p-messages>
+  
+  <div class="save_button">
+    <button pButton type="button" label="Crear cuenta" (click)="saveUser()" class="ui-button-success"></button>
+  </div>
+
+</p-panel>
+</div>

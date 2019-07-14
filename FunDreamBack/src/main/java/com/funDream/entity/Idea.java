@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,10 +35,7 @@ public class Idea {
     
     @NotNull
     private String name;
-    
-    @NotNull
-    private String category;
-    
+          
     @NotNull
     private String objective;
     
@@ -64,9 +63,14 @@ public class Idea {
     @OneToMany(mappedBy = "idea", cascade = CascadeType.ALL)
     private Set<Document> documents  = new HashSet<>();
 
-    public Idea(String name, String category, String objective, String explanation, String contact, String country, String state, String principalImage, Set<User> entrepreneurs) {
-        this.name = name;
-        this.category = category;
+    @NotNull
+    @ManyToMany
+    @JoinTable(name = "rel_idea_categories", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Categories> categories = new HashSet<>();
+    
+    
+    public Idea(String name, String objective, String explanation, String contact, String country, String state, String principalImage, Set<User> entrepreneurs, Set<Document> docuemnts, Set<Categories> categories) {
+        this.name = name;        
         this.objective = objective;
         this.explanation = explanation;
         this.contact = contact;
@@ -74,6 +78,8 @@ public class Idea {
         this.state = state;
         this.principalImage = principalImage;
         this.entrepreneurs = entrepreneurs;
+        this.documents = documents;
+        this.categories = categories;
     }
 
     public long getId() {
@@ -92,12 +98,12 @@ public class Idea {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public Set<Categories> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(Set<Categories> categories) {
+        this.categories = categories;
     }
 
     public String getObjective() {

@@ -5,16 +5,15 @@
  */
 package com.funDream.repository;
 
-import com.funDream.entity.Document;
+import com.funDream.entity.Categories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
-    * @author Felipe Giraldo Leon / github: felipegleon
+ * @author Felipe Giraldo Leon / github: felipegleon
  */
-
 @Repository
-public interface DocumentRepository extends JpaRepository<Document, Long>{
+public interface CategoriesRepository  extends JpaRepository<Categories, Long>{
     
 }

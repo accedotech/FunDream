@@ -50,7 +50,7 @@ public class User {
     @NotNull
     private String country;
     
-    @NotNull
+    
     private Date birthdate;
     
     private String image;
@@ -75,11 +75,14 @@ public class User {
         this.image = image;
     }
 
-    public long getId() {
+    public User() {
+    }
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

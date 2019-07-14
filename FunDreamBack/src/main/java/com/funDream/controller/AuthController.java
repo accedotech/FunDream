@@ -7,7 +7,6 @@ package com.funDream.controller;
 
 import com.funDream.dto.JwtDTO;
 import com.funDream.dto.LoginUser;
-import com.funDream.dto.Menssage;
 import com.funDream.dto.NewUser;
 import com.funDream.entity.Role;
 import com.funDream.entity.User;
@@ -15,6 +14,7 @@ import com.funDream.enums.RoleName;
 import com.funDream.security.jwt.JwtProvider;
 import com.funDream.service.implementation.RoleServiceImpl;
 import com.funDream.service.implementation.UserServiceImpl;
+import com.google.gson.Gson;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
@@ -28,6 +28,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author felipe
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -56,12 +58,12 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
     
-     @PostMapping("/new")
-    public ResponseEntity<?> newUser (@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
+     @PostMapping("/new-user")
+    public ResponseEntity<?> saveUser (@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Menssage("campos vacíos o email inválido"), HttpStatus.BAD_REQUEST);        
+            return new ResponseEntity("Campos vacíos o email inválido.", HttpStatus.BAD_REQUEST);        
         if(userService.existsByEmail(newUser.getEmail()))
-            return new ResponseEntity(new Menssage("ese email ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("Ese email ya existe en el sistema.", HttpStatus.BAD_REQUEST);
         User user = new User(newUser.getFirstName(), newUser.getLastName(), newUser.getEmail(), passwordEncoder.encode(newUser.getPassword()), newUser.getCountry(), newUser.getBirthdate(), newUser.getImage());
         Set<String> rolesStr = newUser.getRoles();
         Set<Role> roles = new HashSet<>();
@@ -78,13 +80,13 @@ public class AuthController {
         }
         user.setRoles(roles);
         userService.save(user);
-        return new ResponseEntity(new Menssage("usuario guardado"), HttpStatus.CREATED);
+        return new ResponseEntity(new Gson().toJson("Usuario creado correctamente."), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){
+    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){        
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Menssage("campos vacíos o email inválido"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("campos vacíos o email inválido", HttpStatus.NOT_ACCEPTABLE);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
         );

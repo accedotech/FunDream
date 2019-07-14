@@ -35,7 +35,9 @@ public class Role {
     public Role(@NotNull RoleName roleName) {
         this.roleName = roleName;
     }
-
+    
+    public Role() {        
+    }
     public long getId() {
         return id;
     }

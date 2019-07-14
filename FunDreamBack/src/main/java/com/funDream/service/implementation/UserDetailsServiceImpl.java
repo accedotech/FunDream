@@ -9,6 +9,7 @@ import com.funDream.entity.User;
 import com.funDream.repository.UserRepository;
 import com.funDream.security.MainUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsServiceImpl implements UserDetailsService{
     
     @Autowired
+    @Qualifier("userRepository")
     private UserRepository userRepository;
 
     @Override
