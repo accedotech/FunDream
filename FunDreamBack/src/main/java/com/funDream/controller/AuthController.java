@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,13 +59,17 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
     
+    @Autowired
+    ModelMapper modelMapper;
+    
      @PostMapping("/new-user")
     public ResponseEntity<?> saveUser (@Valid @RequestBody NewUser newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity("Campos vacíos o email inválido.", HttpStatus.BAD_REQUEST);        
         if(userService.existsByEmail(newUser.getEmail()))
             return new ResponseEntity("Ese email ya existe en el sistema.", HttpStatus.BAD_REQUEST);
-        User user = new User(newUser.getFirstName(), newUser.getLastName(), newUser.getEmail(), passwordEncoder.encode(newUser.getPassword()), newUser.getCountry(), newUser.getBirthdate(), newUser.getImage());
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        User user = this.modelMapper.map(newUser, User.class);
         Set<String> rolesStr = newUser.getRoles();
         Set<Role> roles = new HashSet<>();
         for (String role : rolesStr) {

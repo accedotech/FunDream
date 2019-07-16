@@ -8,7 +8,9 @@ import {CalendarModule} from 'primeng/calendar';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {PanelModule} from 'primeng/panel';
-
+import {MultiSelectModule} from 'primeng/multiselect';
+import {SpinnerModule} from 'primeng/spinner';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -24,7 +26,10 @@ import {PanelModule} from 'primeng/panel';
         CalendarModule,
         MessagesModule,
         MessageModule,
-        PanelModule             
+        PanelModule,
+        MultiSelectModule,
+        SpinnerModule,
+        InputTextareaModule
     ],
 
     exports: [      
@@ -35,7 +40,10 @@ import {PanelModule} from 'primeng/panel';
       CalendarModule,
       MessagesModule,
       MessageModule,
-      PanelModule
+      PanelModule,
+      MultiSelectModule,
+      SpinnerModule,
+      InputTextareaModule
     ]
 })
 

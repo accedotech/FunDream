@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { NewUser } from '../models/new-user';
-import { COUNTRIES } from './countries'
+import { COUNTRIES } from 'src/app/countries';
 import { SelectItem } from 'primeng/api';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {Message} from 'primeng/components/common/api';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
+
 
 
 

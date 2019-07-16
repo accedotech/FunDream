@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login.component';
 import { HomeComponent } from './home/home.component';
 import { interceptorProvider } from './interceptors/interceptor.service';
-import { NewIdeaComponent } from './ideas/new-idea.component';
+import { NewIdeaComponent } from './ideas/new-idea/new-idea.component';
 import { UserComponent } from './users/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { NewUserComponent } from './register/new-user.component'

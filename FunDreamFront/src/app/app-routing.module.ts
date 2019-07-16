@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login.component';
-import { NewIdeaComponent } from './ideas/new-idea.component';
+import { NewIdeaComponent } from './ideas/new-idea/new-idea.component';
 
 import { GuardService as guard} from './guards/guard.service';
 import { AdminComponent } from './admin/admin.component';

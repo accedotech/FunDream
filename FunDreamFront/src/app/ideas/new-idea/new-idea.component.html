@@ -1,0 +1,117 @@
+ <div class="new-idea">
+        <div class="form_idea">
+            <p-panel>
+        <form [formGroup]="form">
+ 
+        <div class="p-grid">
+            <div class="p-col">
+
+                            
+ <!-- Name idea-->
+ <div class="campo_name">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></span>
+      <span class="ui-float-label">
+        <input type="text" pInputText autocomplete="off" formControlName="name"  class="input_name">
+        <label for="float-input">Nombre de la idea</label>
+      </span>
+    </div>
+
+    <div *ngIf="!!validateErrorsForm.name.touched && !!validateErrorsForm.name.errors" style="margin-top: 1%">
+        <p-message severity="error" text="El nombre de la idea es requerido" *ngIf="!!validateErrorsForm.name.errors.required"></p-message>        
+    </div>         
+  </div>
+
+  <!-- Objective-->
+  <div class="campos_input">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+          <span class="ui-float-label">
+            <p-spinner size="30" formControlName="objective" [min]="1" [formatInput]="true" thosandSeparator="," decimalSeparator="." placeholder=" "></p-spinner>
+            <label for="float-input">Objetivo a alcanzar</label>
+          </span>
+        </div>                 
+      </div>
+
+
+<!-- Country -->
+<div class="select_input">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"> <i class="fa fa-globe" aria-hidden="true"></i> </span>
+      <span class="ui-float-label">
+        <p-dropdown  [options]="countries" placeholder=" " [filter]="true" formControlName="country" autowidth="false"
+          [style]="{'width': '100%',  'height': '35px', 'border-radius': '0',  'border': '1px solid #A6A6A6'}">
+        </p-dropdown>
+        <label for="float-input">País de la idea</label>
+      </span>
+    </div>
+
+    <div *ngIf="!!validateErrorsForm.country.touched && !!validateErrorsForm.country.errors" style="margin-top: 1%">              
+        <p-message severity="error" text="Selecciones el país de la idea" *ngIf="!!validateErrorsForm.country.errors.required"></p-message>            
+    </div>  
+
+    
+  </div>
+
+
+         <!-- Contact-->
+ <div class="campos_input">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-comments" aria-hidden="true"></i></span>
+          <span class="ui-float-label">
+            <input type="text" pInputText autocomplete="off" formControlName="contact"  class="inputs">
+            <label for="float-input">Contacto</label>
+          </span>
+        </div>
+    
+        <div *ngIf="!!validateErrorsForm.contact.touched && !!validateErrorsForm.contact.errors" style="margin-top: 1%">
+            <p-message severity="error" text="El contacto es requerido" *ngIf="!!validateErrorsForm.contact.errors.required"></p-message>        
+        </div>         
+      </div>
+    </div>
+  
+
+      <div class="p-col">
+          <div class="upload_image">
+                <img src="data:image/jpeg;base64,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" alt="imagen" width="100%" height="100%"/>
+          </div>
+          <div class="upload_button">
+                <button pButton type="button" label="Seleccionar foto" icon="fa fa-upload"></button>
+        </div>
+        </div>
+</div>
+<hr style="width: 100%  ">
+
+
+<!-- Categories-->
+<div class="categories_input">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"> <i class="fa fa-tags" aria-hidden="true"></i> </span>
+  <p-multiSelect [options]="categories" formControlName="categories"  maxSelectedLabels = "15" defaultLabel="Categorías">     
+  </p-multiSelect>
+</div> 
+<div *ngIf="!!validateErrorsForm.categories.touched && !!validateErrorsForm.categories.errors" style="margin-top: 1%">
+        <p-message severity="error" text="La idea debe pertenecer al menos a una categoria." *ngIf="!!validateErrorsForm.categories.errors.required"></p-message>        
+    </div> 
+    
+</div>
+
+<!-- Explanation-->
+<div class="text_area">
+        <span class="ui-float-label">
+                <textarea  formControlName="explanation" pInputTextarea class="inputText"></textarea>
+                <label for="float-input">Explicación de la idea</label>
+            </span>
+            <div *ngIf="!!validateErrorsForm.explanation.touched && !!validateErrorsForm.explanation.errors" style="margin-top: 1%">
+                    <p-message severity="error" text="La idea debe tener una breve explicación." *ngIf="!!validateErrorsForm.explanation.errors.required"></p-message>        
+                </div> 
+
+  </div>
+
+
+
+
+</form>
+</p-panel>
+</div>
+</div>
