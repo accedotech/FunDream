@@ -11,6 +11,8 @@ import {PanelModule} from 'primeng/panel';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {SpinnerModule} from 'primeng/spinner';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
+import {CardModule} from 'primeng/card';
 
 
 
@@ -29,7 +31,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
         PanelModule,
         MultiSelectModule,
         SpinnerModule,
-        InputTextareaModule
+        InputTextareaModule,
+        FileUploadModule,
+        CardModule
     ],
 
     exports: [      
@@ -43,7 +47,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
       PanelModule,
       MultiSelectModule,
       SpinnerModule,
-      InputTextareaModule
+      InputTextareaModule,
+      FileUploadModule,
+      CardModule
     ]
 })
 

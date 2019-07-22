@@ -7,6 +7,7 @@ package com.funDream.service;
 
 import com.funDream.entity.User;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface UserService {
     boolean existsByEmail(String email);
     
     void save(User user);
+    
+    ResponseEntity<?> searchUserByEmail(String email);
 }
