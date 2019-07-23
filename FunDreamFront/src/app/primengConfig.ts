@@ -13,6 +13,7 @@ import {SpinnerModule} from 'primeng/spinner';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FileUploadModule} from 'primeng/fileupload';
 import {CardModule} from 'primeng/card';
+import {DataViewModule} from 'primeng/dataview';
 
 
 
@@ -33,7 +34,8 @@ import {CardModule} from 'primeng/card';
         SpinnerModule,
         InputTextareaModule,
         FileUploadModule,
-        CardModule
+        CardModule,
+        DataViewModule
     ],
 
     exports: [      
@@ -49,7 +51,8 @@ import {CardModule} from 'primeng/card';
       SpinnerModule,
       InputTextareaModule,
       FileUploadModule,
-      CardModule
+      CardModule,
+      DataViewModule
     ]
 })
 

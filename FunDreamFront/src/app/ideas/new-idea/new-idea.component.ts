@@ -8,13 +8,16 @@ import { Files } from './File';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
+import { Idea } from 'src/app/models/idea';
+import Swal from 'sweetalert2';
+import { IdeaService } from 'src/app/services/idea.service';
 
 
 @Component({
   selector: 'app-new-idea',
   templateUrl: './new-idea.component.html',
   styleUrls: ['./new-idea.component.css'],
-  providers: [CategoriesService]
+  providers: [CategoriesService, UserService, IdeaService]
 })
 export class NewIdeaComponent implements OnInit {
 
@@ -23,7 +26,7 @@ export class NewIdeaComponent implements OnInit {
 
   //managge of files 
   mainImage: File;
-  showImage: any;
+  showImage: any = '';
   uploadedFiles: File[] = [];
   files = Array<Files>();
   file: Files =  new Files();
@@ -35,11 +38,13 @@ export class NewIdeaComponent implements OnInit {
   countries: SelectItem[];
   categories: SelectItem[] = [];
 
+  idea: Idea =  new Idea();
   entrepreneurs: User[] = [];
   mainEntrepreneurs: User = new User();
   emailUser: string;
 
-  constructor(private categoriesService: CategoriesService,
+  constructor(private ideaService: IdeaService,
+              private categoriesService: CategoriesService,
               private userService: UserService, 
               private tokenService: TokenService,
               private formBuilder: FormBuilder,
@@ -140,13 +145,39 @@ export class NewIdeaComponent implements OnInit {
   }
 
 
-  save() {
-    this.fillFiles();
+  saveIdea() {
+    
+    if(this.errorsForm() == false){
+
+      this.fillFiles();
+      this.fillidea();
+
+     this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
+      console.log(response);
+     }, 
+     error =>{
+      console.log(error.error);
+     });
+
+    }else{
+
+    }
   }
 
+  fillidea(){
+            
+    this.idea.name = this.form.value ['name'];
+    this.idea.objective = this.form.value ['objective'];
+    this.idea.explanation = this.form.value ['explanation'];
+    this.idea.country = this.form.value ['country'];
+    this.idea.contact = this.form.value ['contact'];
+    this.idea.categories = this.form.value ['categories'];    
+    this.idea.entrepreneurs = this.entrepreneurs;    
+
+    } 
 
 
-  fillFiles(){
+  fillFiles(){    
     
     for(let i = 0; i < this.uploadedFiles.length; i++){
       this.file.file =  this.uploadedFiles[i];
@@ -200,5 +231,20 @@ export class NewIdeaComponent implements OnInit {
         this.entrepreneurs.splice(i, 1);
       }
     }
+  }
+
+  errorsForm(){
+
+    if(this.form.invalid){
+      Swal.fire('Atención!', 'Hay información aun sin diligenciar.', 'warning');
+      return true;
+    }
+
+    if(this.showImage == ''){
+      Swal.fire('Atención!', 'Debe seleccionar una imagen principal para la idea.', 'warning');
+      return true;
+    }
+   
+    return false;
   }
 }

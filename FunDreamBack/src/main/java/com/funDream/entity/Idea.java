@@ -6,8 +6,8 @@
 package com.funDream.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,21 +58,24 @@ public class Idea implements Serializable {
     @NotNull
     private String state;
     
+    private Date createdAt;
+    
     @NotNull
     @Column(name = "principal_image")
     private String principalImage;
     
     @NotNull
-    @ManyToMany(mappedBy = "ideas")
-    private Set<User> entrepreneurs;
+    @ManyToMany
+    @JoinTable(name = "rel_user_idea", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private List<User> entrepreneurs;
     
     @NotNull    
     @OneToMany(mappedBy = "idea", cascade = CascadeType.ALL)
-    private Set<Document> documents  = new HashSet<>();
+    private List<Document> documents;  
 
     @NotNull
     @ManyToMany
     @JoinTable(name = "rel_idea_categories", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Categories> categories = new HashSet<>();
+    private List<Categories> categories;
                 
 }

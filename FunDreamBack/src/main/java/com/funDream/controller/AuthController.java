@@ -15,7 +15,8 @@ import com.funDream.security.jwt.JwtProvider;
 import com.funDream.service.implementation.RoleServiceImpl;
 import com.funDream.service.implementation.UserServiceImpl;
 import com.google.gson.Gson;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -71,7 +72,7 @@ public class AuthController {
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         User user = this.modelMapper.map(newUser, User.class);
         Set<String> rolesStr = newUser.getRoles();
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new ArrayList();
         for (String role : rolesStr) {
             switch (role) {
                 case "admin":

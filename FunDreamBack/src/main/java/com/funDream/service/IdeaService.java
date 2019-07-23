@@ -5,10 +5,16 @@
  */
 package com.funDream.service;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
  * @author Felipe Giraldo Leon / github: felipegleon
  */
 public interface IdeaService {
     
+    ResponseEntity saveIdea(MultipartFile[] files, String[] type, String json);
+    
+    ResponseEntity getAllIdeas();
 }

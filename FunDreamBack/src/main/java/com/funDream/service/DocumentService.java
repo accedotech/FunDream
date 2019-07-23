@@ -5,10 +5,18 @@
  */
 package com.funDream.service;
 
+import com.funDream.entity.Document;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
  * @author Felipe Giraldo Leon / github: felipegleon
  */
 public interface DocumentService {
     
+    List<Document> uploadFiles(MultipartFile[] files, String[] type);
+    
+    ResponseEntity getFile(String nameFile);
 }

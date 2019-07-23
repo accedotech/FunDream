@@ -1,23 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../services/token.service';
+import { IdeaService } from '../services/idea.service';
+import { Idea } from '../models/idea';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [IdeaService]
 })
 export class HomeComponent implements OnInit {
 
-  info: any = {};
+  
+  ideas: Idea[];
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService, 
+              private ideaSerices: IdeaService) { }
 
-  ngOnInit() {
-    this.info = {
-      token: this.tokenService.getToken(),
-      email: this.tokenService.getEmail(),
-      authorities: this.tokenService.getAuthorities()
-    };
+  ngOnInit() {      
+
   }
+
+
+  getAllIdeas(){
+    
+    this.ideaSerices.getAllIdeas().subscribe(response =>{
+      this.ideas =  response;
+      console.log(response)
+    }, 
+    error=>{
+
+    });
+  }
+ 
 
 }

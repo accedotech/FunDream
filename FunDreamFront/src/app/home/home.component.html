@@ -1,12 +1,18 @@
-<div *ngIf="info.token; else loggedOut">
-    <div class="container">
-      <p><strong>Tu correo de usuario: </strong>{{ info.email}}</p>
-      <p><strong>Este es el token: </strong>{{ info.token}}</p>
-      <p><strong>Tus privilegios: </strong>{{ info.authorities}}</p>
-    </div>
-  </div>
-  <ng-template #loggedOut>
-    <div class="container">
-      No has iniciado sesión
+<button type="button" (click)="getAllIdeas()">buscar</button>
+
+<p-dataView [value]="this.ideas" [paginator]="true" [rows]="10">
+    <p-header>                                    
+                    <p-dropdown  placeholder="Sort By"  [style]="{'min-width':'140px'}"></p-dropdown>                
+    </p-header>
+
+  <ng-template let-idea pTemplate="listItem">
+    <div>
+      <p-card>
+        <div class="image">
+        <img *ngIf="idea?.principalImage"  src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}" alt="" width="100%" height="100%"/>
+      </div>
+          {{idea.name}}
+      </p-card>
     </div>
   </ng-template>
+</p-dataView>

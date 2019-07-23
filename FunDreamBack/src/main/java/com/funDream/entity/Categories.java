@@ -5,8 +5,8 @@
  */
 package com.funDream.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,7 +39,8 @@ public class Categories {
     private String name;        
     
     @NotNull
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories")
-    private Set<Idea> ideas  = new HashSet<>();
+    private List<Idea> ideas;
         
 }

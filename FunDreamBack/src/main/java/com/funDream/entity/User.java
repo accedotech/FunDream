@@ -7,8 +7,7 @@ package com.funDream.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,12 +64,12 @@ public class User implements Serializable {
     @NotNull
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();    
+    private List<Role> roles;    
     
     
-    @ManyToMany
-    @JoinTable(name = "rel_user_idea", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "idea_id"))
-    private Set<Idea> ideas = new HashSet<>();
+    
+    @ManyToMany(mappedBy = "entrepreneurs")    
+    private List<Idea> ideas;
 
         
 }
