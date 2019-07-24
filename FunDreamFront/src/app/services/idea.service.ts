@@ -23,6 +23,7 @@ export class IdeaService {
       formData.append('type', files[i].type);
     }    
     formData.append('idea', JSON.stringify(idea));
+    
     return this.httpClient.post<string>(this.ideaURL, formData);
   }
 

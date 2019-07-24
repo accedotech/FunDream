@@ -64,8 +64,7 @@ public class IdeaServiceImpl implements IdeaService{
             mensagge = "Error en el servidor, Los archivos no han podido ser guardados.";
             return new ResponseEntity(mensagge,  HttpStatus.NOT_ACCEPTABLE);
         }
-        
-        idea.setDocuments(documents);
+                
         idea.setState("created");
         idea.setCreatedAt(new Date());
         for(Document document: documents){
@@ -79,6 +78,18 @@ public class IdeaServiceImpl implements IdeaService{
         if(createdIdea == null){
             mensagge = "Error en la base de datos, La idea no pudo ser guardada.";
             return new ResponseEntity(mensagge,  HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        
+        for(Document document: documents){
+            document.setIdea(createdIdea);
+        }
+        
+        List<Document> createdDocuemnts = this.documentService.saveDocumentsList(documents);        
+        
+        if(createdDocuemnts ==  null || createdDocuemnts.isEmpty()){
+        mensagge = "La idea fue creada, pero los documentos no pudieron ser guardados.";
+        return new ResponseEntity( mensagge,  HttpStatus.NOT_ACCEPTABLE);    
         }
         
         mensagge = "La idea fue creada correctamente.";

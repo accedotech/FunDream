@@ -62,7 +62,7 @@ public class DocumentServiceImpl implements DocumentService{
                           return null;
                     } 
                     
-                    documentList.add(  this.documentRepository.save(new Document(pathFile.toString(), nameFile,  type[i])));                
+                    documentList.add(new Document(nameFile,  type[i]));                
                 }
                 else{
                     return null;
@@ -98,4 +98,20 @@ public class DocumentServiceImpl implements DocumentService{
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"");
         return new ResponseEntity(file, header, HttpStatus.OK);
     }
+     
+     public List<Document> saveDocumentsList(List<Document> documents){
+         
+         List<Document> documentsSaved =  new ArrayList();
+         Document documentsaved;
+         
+         for(Document document: documents){
+             documentsaved = this.documentRepository.save(document);
+             if(documentsaved == null){
+                return null;
+             }
+             documentsSaved.add(documentsaved);
+         }
+         
+         return documentsSaved;
+     }
 }

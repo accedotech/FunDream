@@ -69,8 +69,8 @@ public class Idea implements Serializable {
     @ManyToMany()    
     @JoinTable(name = "rel_user_idea", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private List<User> entrepreneurs;
+          
     
-    @NotNull        
     @OneToMany(mappedBy = "idea")
     private List<Document> documents;  
 

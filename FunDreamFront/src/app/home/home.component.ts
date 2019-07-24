@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(private ideaSerices: IdeaService,
               private router: Router) { } 
 
-  ngOnInit() {      
+  ngOnInit() {     
+    
     this.getAllIdeas();
   }
 

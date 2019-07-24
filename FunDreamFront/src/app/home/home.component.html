@@ -9,28 +9,34 @@
         <div class="p-grid">
           <div class="p-col">
             <div class="image">
-              <img *ngIf="idea?.principalImage" src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}" alt="" width="100%" height="100%" />
+              <img *ngIf="idea?.principalImage"
+                src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}" alt="" width="100%"
+                height="100%" />
             </div>
           </div>
 
           <div class="p-col">
-              <div class="header">
-                <h1>{{idea.name}}</h1> 
 
-                <p> {{idea.explanation}} </p>  
+            <div class="header">
+              <h1 class="title">{{idea.name}}</h1>
+            </div>
+            <div class="body">
+              <p style="text-align: justify; margin: 3%;"> {{idea.explanation}} </p>
+
+            </div>
+
+            <div class="footer">
+              <p> <i class="fa fa-line-chart" aria-hidden="true"></i> <strong style="margin-left: 3%">{{idea.objective | number : fractionSize}} COP</strong></p>
+
+              <p><i class="fa fa-globe" aria-hidden="true"></i> <strong style="margin-left: 3%"> {{idea.country}} </strong></p>
+
+              <p><i class="fa fa-registered" aria-hidden="true"></i> <strong style="margin-left: 3%">  {{idea.createdAt | date: 'fullDate'}} </strong> </p>
+
+              <div class="button">
+                <button pButton type="button" icon="fa fa-search-plus" label="Conocer mas"
+                  [routerLink]="['/show-idea', idea.name]"></button>
               </div>
-                
-                <div class="footer">
-                <p>Objetivo a alcanzar: <strong>{{idea.objective | number : fractionSize}} COP</strong></p>
-
-                <p>País: {{idea.country}} </p>  
-
-                <p>Fecha de registro: {{idea.createdAt | date:'short'}} </p>  
-
-                <div class="button">
-                <button pButton type="button" icon="fa fa-search-plus" label="Conocer mas" [routerLink]="['/show-idea', idea.name]"></button>
-                </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>

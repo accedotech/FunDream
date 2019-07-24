@@ -5,6 +5,7 @@
  */
 package com.funDream.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,22 +34,20 @@ public class Document implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;        
     
     @NotNull
-    private String link;
-    
     private String nameFile;
         
     @NotNull
     private String type;
     
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idea_id", referencedColumnName = "id")
     private Idea idea;
 
-    public Document(String link, String nameFile, String type) {        
-        this.link = link;
+    public Document(String nameFile, String type) {                
         this.nameFile = nameFile;
         this.type = type;
     }

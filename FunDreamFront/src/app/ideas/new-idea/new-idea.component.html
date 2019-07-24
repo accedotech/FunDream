@@ -33,7 +33,7 @@
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
           <span class="ui-float-label">
-            <p-spinner size="30" formControlName="objective" [min]="1" [formatInput]="true" thosandSeparator="," decimalSeparator="." placeholder=" "></p-spinner>
+            <p-spinner size="30" formControlName="objective" [min]="1"  (keypress)="omitNumbers($event)" [formatInput]="true" thosandSeparator="," decimalSeparator="." placeholder=" "></p-spinner>
             <label for="float-input">Objetivo a alcanzar</label>
           </span>
         </div>                 
@@ -147,27 +147,33 @@
         </p-card>
     </div>
 
-    <div *ngFor="let user of this.entrepreneurs" class="p-col">
+    <div *ngFor="let entrepreneur of this.entrepreneurs" class="p-col">
         <p-card>
       <h3>Emprendedor</h3>
-      <p><label>{{user.firstName}}</label></p>
-      <p><label>{{user.lastName}}</label></p>
-      <p><label>{{user.email}}</label></p>
-      <p><label>{{user.country}}</label></p>
+      <p><label>{{entrepreneur.firstName}}</label></p>
+      <p><label>{{entrepreneur.lastName}}</label></p>
+      <p><label>{{entrepreneur.email}}</label></p>
+      <p><label>{{entrepreneur.country}}</label></p>
       <p-footer>
-          <button pButton type="button" label="Eliminar" icon="fa fa-times" (click)="removeentrepreneurs(user.email)"></button>          
+          <button pButton type="button" label="Eliminar" icon="fa fa-times" (click)="removeentrepreneurs(entrepreneur.email)"></button>          
       </p-footer>
     </p-card>
     </div>
     
   </div>
 
-  <div class="campo_search">                  
+  <div class="campo_search">       
+      <form [formGroup]="searchUser">           
       <span class="ui-float-label">
-        <input type="text" pInputText autocomplete="off" [(ngModel)]="this.emailUser" class="input_search">
-        <button pButton type="button" icon="fa fa-search" class="search_entrepreneurs" (click)="searchEntrepreneursByEmail(this.emailUser)" ></button>                
-        <label for="float-input">Agregar emprendedor</label>
-      </span>                          
+        <input type="text" pInputText autocomplete="off" formControlName="emailUser" (keypress)="omitKeys($event)" class="input_search">
+        <button pButton type="button" icon="fa fa-search" class="search_entrepreneurs" (click)="searchEntrepreneursByEmail(this.searchUser.value ['emailUser'])" ></button>                
+        <label for="float-input">Agregar emprendedor por correo electronico</label>
+      </span> 
+          </form>                     
+          <div *ngIf="!!validateSearchUser.emailUser.touched && !!validateSearchUser.emailUser.errors" style="margin-top: 1%">
+              <p-message severity="warn" text="Ingrese una dirección de correo valida." *ngIf="!!validateSearchUser.emailUser.errors.email"></p-message>        
+          </div> 
+          <p-messages [(value)]="errorMessageSearch"></p-messages>
   </div>
 </div>
 

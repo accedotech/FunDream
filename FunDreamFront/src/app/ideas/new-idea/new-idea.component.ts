@@ -11,6 +11,7 @@ import { User } from 'src/app/models/User';
 import { Idea } from 'src/app/models/idea';
 import Swal from 'sweetalert2';
 import { IdeaService } from 'src/app/services/idea.service';
+import {Message} from 'primeng/components/common/api';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class NewIdeaComponent implements OnInit {
 
   //Validate form
   form: FormGroup;
+  searchUser:FormGroup;
 
   //managge of files 
   mainImage: File;
@@ -38,10 +40,14 @@ export class NewIdeaComponent implements OnInit {
   countries: SelectItem[];
   categories: SelectItem[] = [];
 
+  //objects
   idea: Idea =  new Idea();
   entrepreneurs: User[] = [];
   mainEntrepreneurs: User = new User();
-  emailUser: string;
+
+  //errors
+  errorMessageSearch: Message [] = [];
+  
 
   constructor(private ideaService: IdeaService,
               private categoriesService: CategoriesService,
@@ -65,15 +71,20 @@ export class NewIdeaComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      objective: [],
+      objective: [0],
       explanation: ['', Validators.compose([Validators.required, Validators.maxLength(5000)])],
       contact: ['', Validators.required],
       country: ['', Validators.required],      
       categories: [[], Validators.required],      
     });
+
+    this.searchUser = this.formBuilder.group({
+      emailUser: ['', Validators.email]
+    })
   }
 
   get validateErrorsForm() { return this.form.controls };
+  get validateSearchUser() { return this.searchUser.controls}
 
   fillSelectCategories() {
     this.categoriesService.getAllCategories().subscribe(response => {
@@ -156,18 +167,42 @@ export class NewIdeaComponent implements OnInit {
 
     this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
       console.log(response);
+
+      Swal.fire({
+        title: 'Éxito!',
+        text: response,      
+        type: 'success',      
+        confirmButtonColor: '#A3E2C6',      
+        confirmButtonText: 'Continuar'
+      }).then((result) => {
+        if (result.value) {
+          return this.router.navigate(['home']);
+        }
+      });  
+
      }, 
      error =>{
-      console.log(error.error);
+      this.idea.entrepreneurs = [];
+      Swal.fire({
+        title: 'Error!',
+        text: error.error,      
+        type: 'error',      
+        confirmButtonColor: '#A3E2C6',      
+        confirmButtonText: 'Continuar'
+      }).then((result) => {
+        if (result.value) {
+          return this.router.navigate(['home']);
+        }
+      });        
      });
-
+     
     }else{
-
+      Swal.fire('Atención!', 'Aun hay campos incompletos o sin diligenciar.', 'warning');
     }
   }
 
-  fillidea(){
-            
+  fillidea(){    
+    
     this.idea.name = this.form.value ['name'];
     this.idea.objective = this.form.value ['objective'];
     this.idea.explanation = this.form.value ['explanation'];
@@ -175,27 +210,37 @@ export class NewIdeaComponent implements OnInit {
     this.idea.contact = this.form.value ['contact'];
     this.idea.categories = this.form.value ['categories'];    
 
-    let entrepreneurs: User[] =  this.entrepreneurs;
-    entrepreneurs.push(this.mainEntrepreneurs);
-    this.idea.entrepreneurs = entrepreneurs;
+    let users: User[] =  this.entrepreneurs;
+
+    users.push(this.mainEntrepreneurs);
+    
+    this.idea.entrepreneurs = users;
         
     } 
 
 
   fillFiles(){    
-    
+    let filesTemp: Files[] = [];
     for(let i = 0; i < this.uploadedFiles.length; i++){
+
       this.file.file =  this.uploadedFiles[i];
       this.file.type = 'secondary';
-      this.files.push(this.file);
+
+      filesTemp.push(this.file);
+
       delete this.file;
       this.file =  new Files();
+
     }
 
     this.file.file = this.mainImage;
     this.file.type = 'main';
-    this.files.push(this.file);
 
+    filesTemp.push(this.file);
+    this.files = filesTemp;
+
+    delete this.file;
+    this.file =  new Files();
     console.log(this.files);         
   }
 
@@ -215,19 +260,24 @@ export class NewIdeaComponent implements OnInit {
       this.mainEntrepreneurs= response;         
     }, 
     error => {
-
+      Swal.fire('Atención!', 'No se pudo cargar emprendedor por defecto, así que debe buscarlo manualmente.', 'warning');
     });
 
   }  
 
   searchEntrepreneursByEmail(email: string){
-    this.userService.searchUserByEmail(email).subscribe(response => {
-      this.entrepreneurs.push(response);          
-    }, 
-    error => {
-
-    });
-
+    if(email != ''){
+      this.userService.searchUserByEmail(email).subscribe(response => {
+        this.entrepreneurs.push(response);   
+        this.searchUser.get('emailUser').setValue('');
+      }, 
+      error => {
+        this.errorMessageSearch.push({severity:'error', summary:'Error en la busqueda.', detail: error.error});        
+      });
+    }else{
+      this.errorMessageSearch.push({severity:'warn', summary:'Error en la busqueda.', detail: 'Por favor ingrese un correo.'});        
+      
+    }
   }
 
   removeentrepreneurs(email: string){    
@@ -248,8 +298,26 @@ export class NewIdeaComponent implements OnInit {
     if(this.showImage == ''){
       Swal.fire('Atención!', 'Debe seleccionar una imagen principal para la idea.', 'warning');
       return true;
+    }    
+
+    
+    if(this.mainEntrepreneurs == null && this.entrepreneurs.length == 0){
+      Swal.fire('Atención!', 'Debe seleccionar emprendedores para la idea.', 'warning');
+      return true;
     }
    
     return false;
+  }
+
+  omitNumbers(event){
+    if(event.charCode >= 48 && event.charCode <= 57){
+      return true;
+     }
+     return false;
+  }
+
+  omitKeys(event){   
+    var pressedKey = event.charCode; 
+    return pressedKey != 32;  //value of the key space 
   }
 }

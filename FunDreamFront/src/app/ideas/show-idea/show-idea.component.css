@@ -20,17 +20,23 @@
     height: 600px;
 }
 
-.info{    
-    width: 100%;
-    height: 20%;
-    
+.categories{
+    background-color: #F7F7F7;
+    width: 100%;    
 }
 
-.categories{
+
+
+.objective{
+    width: 100%;
+    height: 20%;
+}
+.entrepreneurs{    
     width: 100%;
     height: 40%;
 }
-.entrepreneurs{    
+
+.info{
     width: 100%;
     height: 40%;
 }
@@ -53,4 +59,30 @@
     background-color: #617C8A;
     border-radius: 2px;
 
+}
+
+.explanation{
+    background-color: #F7F7F7;
+}
+
+.galleria{
+    background-color: white; 
+    width: 47%;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
+
+.explanationTitles h2{
+    width: 50%;
+}
+
+
+
+
+
+:host >>> .ui-galleria .ui-panel-images{
+    width: 100% !important;
+    height: 100% !important;    
+    border: 1px solid #617C8A;  
 }

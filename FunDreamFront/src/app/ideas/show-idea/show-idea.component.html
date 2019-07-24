@@ -14,63 +14,107 @@
       </div>
 
       <div class="p-col">
+
+        <div class="objective">
           <div class="infoTitles">
-              <h2 class="title">Información</h2>
+            <h3 class="title"> <label style="margin-left: 5%"> Objetivo </label></h3>
+            <div class="p-grid">
+              <p-card>
+                <p style="width: 100%"> <i class="fa fa-line-chart" aria-hidden="true"></i> <strong
+                    style="margin-left: 5%"> {{idea.objective | number : fractionSize}} COP</strong> </p>
+              </p-card>
+            </div>
           </div>
-        <div class="info">                      
-            <p-card>
-              <p> <strong>Contacto: </strong> {{idea.contact}} </p>
-              <p> <strong>País: </strong> {{idea.country}} </p>
-              <p> <strong>Fecha de registro: </strong> {{idea.createdAt | date: 'fullDate'}}</p>
-            </p-card>
+        </div>
 
+        <div class="entrepreneurs">
+          <div class="infoTitles">
+            <h3 class="title"> <label style="margin-left: 5%"> Emprendedores </label></h3>
           </div>
-
-          <div class="catefories">
-              <div class="infoTitles">
-                  <h3 class="title">Categorias</h3>
-                </div>
-                <div class="p-grid">
-                    <div class="p-col" *ngFor="let categories of this.idea.categories">
-                      <p-card>
-                        <p style="text-align: center">{{categories.name}}</p>                                                                        
-                      </p-card>
-                    </div>
-                  </div>
+          <div class="p-grid">
+            <div class="p-col" *ngFor="let entrepreneurs of this.idea.entrepreneurs">
+              <p-card>
+                <p>{{entrepreneurs.firstName}}</p>
+                <p>{{entrepreneurs.lastName}}</p>
+                <p>{{entrepreneurs.country}}</p>
+                <p>{{entrepreneurs.birthdate | date: 'longDate'}}</p>
+              </p-card>
+            </div>
           </div>
+        </div>
 
-          <div class="entrepreneurs">
+
+
+
+        <div class="info">
+          <div class="contact">
             <div class="infoTitles">
-              <h3 class="title">Emprendedores</h3>
+              <h3 class="title"> <label style="margin-left: 5%"> Contacto </label></h3>
             </div>
             <div class="p-grid">
-              <div class="p-col" *ngFor="let entrepreneurs of this.idea.entrepreneurs">
-                <p-card>
-                  <p>{{entrepreneurs.firstName}}</p>
-                  <p>{{entrepreneurs.lastName}}</p>
-                  <p>{{entrepreneurs.country}}</p>
-                  <p>{{entrepreneurs.birthdate | date: 'longDate'}}</p>
-                </p-card>
-              </div>
+              <p-card>
+                <p style="width: 100%"> <i class="fa fa-comments" aria-hidden="true"></i> <strong
+                    style="margin-left: 5%">{{idea.contact}} </strong> </p>
+              </p-card>
             </div>
           </div>
 
 
+          <div style="margin-top: 2%;">
+            <label> <i class="fa fa-globe" aria-hidden="true" style="margin-left: 3%; margin-right: 3%;"></i>
+              {{idea.country}}</label>
+          </div>
 
-        
+
+          <div style="margin-top: 2%;">
+            <label> <i class="fa fa-registered" aria-hidden="true"
+                style="margin-left: 3%; margin-right: 3%;"></i>{{idea.createdAt | date: 'fullDate'}}</label>
+          </div>
+        </div>
+
+
       </div>
     </div>
+  </div>
+
+  <hr style="width: 100%">
+
+  <div class="body">
+
+    <div class="explanation">
+      <div class="explanationTitles">
+        <h2 class="title"> <label style="margin-left: 5%"> Nuestra idea </label></h2>
+      </div>
+      <div style="margin: 5%">
+        <p style="text-align: justify; font-family: Arial, Helvetica, sans-serif"> {{idea.explanation}}</p>
+      </div>
+      <br>
+    </div>
+
+    <div style="background-color: white; margin: 2%;">
+      <div class="galleria">
+        <p-galleria [images]="images" [showFilmstrip]="true" [showCaption]="false" [autoPlay]="false"
+          effectDuration=2000></p-galleria>
+      </div>
     </div>
 
     <hr style="width: 100%">
 
-    <div class="body">
-
-      <h2> ¿Que somos? </h2>
-      <p> {{idea.explanation}}</p>
-
+    <div class="categories">
+      <div class="explanationTitles">
+        <h2 class="title"> <label style="margin-left: 5%"> Categorias </label></h2>
+      </div>
+      <div class="p-grid">
+        <div class="p-col" *ngFor="let categories of this.idea.categories">
+          <p-card>
+            <p style="text-align: center">{{categories.name}}</p>
+          </p-card>
+        </div>
+      </div>
     </div>
 
-
-
   </div>
+
+
+
+</div>

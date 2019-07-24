@@ -14,6 +14,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FileUploadModule} from 'primeng/fileupload';
 import {CardModule} from 'primeng/card';
 import {DataViewModule} from 'primeng/dataview';
+import {GalleriaModule} from 'primeng/galleria';
 
 
 
@@ -35,7 +36,8 @@ import {DataViewModule} from 'primeng/dataview';
         InputTextareaModule,
         FileUploadModule,
         CardModule,
-        DataViewModule
+        DataViewModule,
+        GalleriaModule
     ],
 
     exports: [      
@@ -52,7 +54,8 @@ import {DataViewModule} from 'primeng/dataview';
       InputTextareaModule,
       FileUploadModule,
       CardModule,
-      DataViewModule
+      DataViewModule,
+      GalleriaModule
     ]
 })
 

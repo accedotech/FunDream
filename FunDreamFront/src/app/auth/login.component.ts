@@ -5,7 +5,7 @@ import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Message} from 'primeng/components/common/api';
-import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-login',
@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    if (this.tokenService.getToken()){
+      return this.router.navigate(['home']);
+    }
     this.buildForm();
 
     if (this.tokenService.getToken()) {
@@ -64,9 +67,8 @@ export class LoginComponent implements OnInit {
 
     this.isLogged = true;
     this.isLoginFail = false;
-    this.roles = this.tokenService.getAuthorities();
-    window.location.reload();    
-    return this.router.navigate(['home']); 
+    this.roles = this.tokenService.getAuthorities();  
+    window.location.reload();            
     },
       (error: any) => {
         this.isLogged = false;

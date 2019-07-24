@@ -1,0 +1,34 @@
+//CREACION DE LA BASE DE DATOS 
+
+CREATE DATABASE IF NOT EXISTS FunDream CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+//CONFIGURACION DE LAS RELACIONES DE LAS TABLAS
+
+ALTER TABLE FunDream.categories ENGINE = InnoDB;
+ALTER TABLE FunDream.document ENGINE = InnoDB;
+ALTER TABLE FunDream.idea ENGINE = InnoDB;
+ALTER TABLE FunDream.rel_idea_categories ENGINE = InnoDB;
+ALTER TABLE FunDream.rel_user_idea ENGINE = InnoDB;
+ALTER TABLE FunDream.role ENGINE = InnoDB;
+ALTER TABLE FunDream.user ENGINE = InnoDB;
+ALTER TABLE FunDream.user_role ENGINE = InnoDB;
+
+//INSERTAR LOS ROLES EN LA TABLA ROLE DE LA BASE DE DATOS 
+
+INSERT INTO FunDream.role (`id`, `roleName`) VALUES ('1', 'ROLE_ADMIN'), ('2', 'ROLE_USER');
+
+//ISERTAR CATEGORIAS EN LA TABLA DE CATEGORIAS DE LA BASE DE DATOS 
+
+INSERT INTO FunDream.categories (`id`, `name`) VALUES 
+('1', 'Alimentos'), 
+('2', 'Empresarial'), 
+('3', 'Deportes'), 
+('4', 'Servicios'), 
+('5', 'Estética'), 
+('6', 'Arte'), 
+('7', 'Tecnología'), 
+('8', 'Salud'), 
+('9', 'Mascotas'), 
+('10', 'Educación'), 
+('11', 'Ambiental');

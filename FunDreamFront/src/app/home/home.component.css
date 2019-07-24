@@ -6,13 +6,16 @@
 
 .idea{
     margin: 3%;
-    border: 1px solid #617C8A;
+    
     background-color: #F7F7F7;
 }
 
 .image{
+    margin-left: 4%; 
+    margin-top: 8%;     
     width: 550px;
     height: 450px;
+    border: 1px solid #617C8A;
 }
 
 .button{
@@ -20,13 +23,25 @@
     margin: 2%; 
 }
 
-.header{    
-    height: 70%;
+.title{              
+    color: white;
+    background-color: #617C8A;
+    border-radius: 2%;
+
 }
+
 .header h1{
-    text-align: center;
-    color: #617C8A
+    text-align: center;    
+}
+
+.body{        
+    height: 330px;
+    width: 100%;
+    overflow-y: scroll;
 }
 .footer{
-    height: 30%;
+    margin-left: 3%;
+    margin-top: 3%; 
+    height: 110px;
 }
+
