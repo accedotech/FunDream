@@ -1,4 +1,32 @@
+.container{
+    margin: 3%;
+    width: 94%;
+    height: 94%; 
+}
+
+.idea{
+    margin: 3%;
+    border: 1px solid #617C8A;
+    background-color: #F7F7F7;
+}
+
 .image{
-    width: 300px;
-    height: 300px;
+    width: 550px;
+    height: 450px;
+}
+
+.button{
+    text-align: right;
+    margin: 2%; 
+}
+
+.header{    
+    height: 70%;
+}
+.header h1{
+    text-align: center;
+    color: #617C8A
+}
+.footer{
+    height: 30%;
 }

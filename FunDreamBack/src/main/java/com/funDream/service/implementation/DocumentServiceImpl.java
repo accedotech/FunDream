@@ -6,6 +6,7 @@
 package com.funDream.service.implementation;
 
 import com.funDream.entity.Document;
+import com.funDream.repository.DocumentRepository;
 import com.funDream.service.DocumentService;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +32,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class DocumentServiceImpl implements DocumentService{
+   
+    
+    @Autowired
+    private DocumentRepository documentRepository;
     
     private final String uri = "/home/felipe/Applications/FunDream/filesApplication/ideas";    
     
@@ -56,7 +62,7 @@ public class DocumentServiceImpl implements DocumentService{
                           return null;
                     } 
                     
-                    documentList.add(new Document(pathFile.toString(), nameFile,  type[i]));                
+                    documentList.add(  this.documentRepository.save(new Document(pathFile.toString(), nameFile,  type[i])));                
                 }
                 else{
                     return null;

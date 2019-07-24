@@ -5,7 +5,9 @@
  */
 package com.funDream.dto;
 
+import com.funDream.entity.Role;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +27,5 @@ public class UserDTO {
     private String email;
     private String country;
     private Date birthdate;
-    private String image;
+    private String image;    
 }

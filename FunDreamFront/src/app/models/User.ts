@@ -6,7 +6,7 @@ export class User{
     email: string;
     country: string;
     birthdate: Date;
-    image: string;
+    image: string;    
 
     constructor(){
         

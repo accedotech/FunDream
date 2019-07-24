@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,10 @@ public class IdeaController {
     @GetMapping()
     public ResponseEntity getAllIdeas(){
         return this.ideaService.getAllIdeas();
+    }
+    
+    @GetMapping("/show-idea/{nameIdea}")
+    public ResponseEntity getIdeaByName(@PathVariable ("nameIdea") String nameIdea){
+        return this.ideaService.getIdeaByName(nameIdea);
     }
 }

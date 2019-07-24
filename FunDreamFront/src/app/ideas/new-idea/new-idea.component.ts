@@ -152,7 +152,9 @@ export class NewIdeaComponent implements OnInit {
       this.fillFiles();
       this.fillidea();
 
-     this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
+      console.log(this.idea)
+
+    this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
       console.log(response);
      }, 
      error =>{
@@ -172,8 +174,11 @@ export class NewIdeaComponent implements OnInit {
     this.idea.country = this.form.value ['country'];
     this.idea.contact = this.form.value ['contact'];
     this.idea.categories = this.form.value ['categories'];    
-    this.idea.entrepreneurs = this.entrepreneurs;    
 
+    let entrepreneurs: User[] =  this.entrepreneurs;
+    entrepreneurs.push(this.mainEntrepreneurs);
+    this.idea.entrepreneurs = entrepreneurs;
+        
     } 
 
 

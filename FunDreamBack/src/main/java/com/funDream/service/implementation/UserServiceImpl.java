@@ -6,9 +6,12 @@
 package com.funDream.service.implementation;
 
 import com.funDream.dto.UserDTO;
+import com.funDream.entity.Idea;
 import com.funDream.entity.User;
+import com.funDream.repository.IdeaRepository;
 import com.funDream.repository.UserRepository;
 import com.funDream.service.UserService;
+import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +28,13 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
     
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     
     @Autowired
-    ModelMapper modelMapper;
+    private IdeaRepository ideaRepository;
+    
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public Optional<User> getByEmail(String email){
@@ -57,5 +63,9 @@ public class UserServiceImpl implements UserService{
         return new ResponseEntity( this.modelMapper.map(user.get(), UserDTO.class)  , HttpStatus.OK);
     }
     
-
+    
+    
+   
+    
+    
 }

@@ -30,5 +30,9 @@ export class IdeaService {
     return this.httpClient.get<Idea[]>(this.ideaURL, {headers: this.headers});
   }
 
+  getIdeaByName(nameIdea: string): Observable<Idea>{
+    return this.httpClient.get<Idea>(this.ideaURL + '/show-idea/' + nameIdea, {headers: this.headers});
+  }
+
   
 }

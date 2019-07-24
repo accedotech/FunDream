@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +51,12 @@ public class IdeaServiceImpl implements IdeaService{
             return new ResponseEntity(mensagge, HttpStatus.NOT_ACCEPTABLE);   
         }
         
+        
+        Idea repetIdea = this.ideaRepository.findByName(idea.getName());
+        if(repetIdea != null){
+            mensagge = "En el sistema ya se encuentra una idea registrada con ese nombre: " + idea.getName();
+            return new ResponseEntity(mensagge,  HttpStatus.NOT_ACCEPTABLE);
+        }
         
         //Save the files  
         List<Document> documents= this.documentService.uploadFiles(files, type);        
@@ -91,6 +96,16 @@ public class IdeaServiceImpl implements IdeaService{
         }
         
         return new ResponseEntity(ideasList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity getIdeaByName(String nameIdea) {
+        Idea idea = this.ideaRepository.findByName(nameIdea);
+        
+        if(idea == null){
+            return new ResponseEntity("No se encontro ninguna idea con el nombre de: " + nameIdea,  HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(idea,  HttpStatus.OK);
     }
     
     

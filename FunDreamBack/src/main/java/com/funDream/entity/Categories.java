@@ -39,7 +39,7 @@ public class Categories {
     private String name;        
     
     @NotNull
-    @JsonIgnore
+    @JsonIgnore    
     @ManyToMany(mappedBy = "categories")
     private List<Idea> ideas;
         

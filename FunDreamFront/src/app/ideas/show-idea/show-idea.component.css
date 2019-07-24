@@ -1,0 +1,56 @@
+.show-idea{
+    margin: 2%;
+    width: 96%;
+    height: 96%;        
+}
+
+.header{
+    width: 100%;
+    text-align: center;
+}
+
+.background{
+    width: 100%;
+    height: 100%;
+    background-color: #F7F7F7;
+}
+
+.image{
+    width: 100%;
+    height: 600px;
+}
+
+.info{    
+    width: 100%;
+    height: 20%;
+    
+}
+
+.categories{
+    width: 100%;
+    height: 40%;
+}
+.entrepreneurs{    
+    width: 100%;
+    height: 40%;
+}
+
+.infoTitles  h2{
+    text-align: center
+}
+
+.infoTitles  h3{
+    width: 50%;
+}
+.p-grid{    
+    margin: 2%;
+    width: 96%;
+    height: 96%;        
+}
+
+.title{              
+    color: white;
+    background-color: #617C8A;
+    border-radius: 2px;
+
+}

@@ -37,10 +37,11 @@ import lombok.NoArgsConstructor;
 public class Idea implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Long id;
     
     @NotNull
+    @Column(unique = true)
     private String name;
           
     
@@ -64,16 +65,16 @@ public class Idea implements Serializable {
     @Column(name = "principal_image")
     private String principalImage;
     
-    @NotNull
-    @ManyToMany
+    @NotNull    
+    @ManyToMany()    
     @JoinTable(name = "rel_user_idea", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private List<User> entrepreneurs;
     
-    @NotNull    
-    @OneToMany(mappedBy = "idea", cascade = CascadeType.ALL)
+    @NotNull        
+    @OneToMany(mappedBy = "idea")
     private List<Document> documents;  
 
-    @NotNull
+    @NotNull    
     @ManyToMany
     @JoinTable(name = "rel_idea_categories", joinColumns = @JoinColumn(name = "idea_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Categories> categories;

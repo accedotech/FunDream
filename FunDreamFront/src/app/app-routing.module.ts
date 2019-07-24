@@ -8,12 +8,15 @@ import { GuardService as guard} from './guards/guard.service';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './users/user.component';
 import { NewUserComponent } from './register/new-user.component';
+import { ShowIdeaComponent } from './ideas/show-idea/show-idea.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: NewUserComponent},  
+  {path: 'show-idea', component: ShowIdeaComponent},
+  {path: 'show-idea/:nameIdea', component: ShowIdeaComponent},
   {path: 'new-idea', component: NewIdeaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
 
   {path: 'admin', component: AdminComponent, canActivate: [guard], data: {expectedRol: ['admin']}},

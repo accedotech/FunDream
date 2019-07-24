@@ -29,7 +29,7 @@ public class DocumentController {
     @Autowired
     private DocumentServiceImpl documentService;
     
-    @GetMapping("/show-image/{nameFile}")    
+    @GetMapping("/show-image/{nameFile:.+}")    
     public ResponseEntity getFile(@PathVariable("nameFile") String nameFile){        
         return this.documentService.getFile(nameFile);
     }

@@ -5,6 +5,7 @@
  */
 package com.funDream.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -68,7 +69,8 @@ public class User implements Serializable {
     
     
     
-    @ManyToMany(mappedBy = "entrepreneurs")    
+    @ManyToMany(mappedBy = "entrepreneurs")        
+    @JsonIgnore
     private List<Idea> ideas;
 
         
