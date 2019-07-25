@@ -189,10 +189,6 @@ export class NewIdeaComponent implements OnInit {
         type: 'error',      
         confirmButtonColor: '#A3E2C6',      
         confirmButtonText: 'Continuar'
-      }).then((result) => {
-        if (result.value) {
-          return this.router.navigate(['home']);
-        }
       });        
      });
      
