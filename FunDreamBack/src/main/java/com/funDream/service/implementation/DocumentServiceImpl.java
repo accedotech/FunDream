@@ -37,8 +37,8 @@ public class DocumentServiceImpl implements DocumentService{
     @Autowired
     private DocumentRepository documentRepository;
     
-    // private final String uri = "/home/felipe/Applications/FunDream/filesApplication/ideas";    
-    private final String uri = "/home/caylyn/Escritorio/FunDream/filesApplication/ideas";
+    private final String uri = "/home/felipe/Applications/FunDream/filesApplication/ideas";    
+    //private final String uri = "/home/caylyn/Escritorio/FunDream/filesApplication/ideas";
     
     @Override
     public List<Document> uploadFiles(MultipartFile[] files, String[] type){
