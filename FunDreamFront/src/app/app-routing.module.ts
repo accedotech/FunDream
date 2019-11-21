@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './users/user.component';
 import { NewUserComponent } from './register/new-user.component';
 import { ShowIdeaComponent } from './ideas/show-idea/show-idea.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -17,8 +18,8 @@ const routes: Routes = [
   {path: 'register', component: NewUserComponent},  
   {path: 'show-idea', component: ShowIdeaComponent},
   {path: 'show-idea/:nameIdea', component: ShowIdeaComponent},
-  {path: 'new-idea', component: NewIdeaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-
+  {path: 'new-idea', component: NewIdeaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},   
+  {path: 'transaction', component: TransactionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
   {path: 'admin', component: AdminComponent, canActivate: [guard], data: {expectedRol: ['admin']}},
   {path: 'user', component: UserComponent, canActivate: [guard], data: {expectedRol: ['user']}},  
   //Redireccionamiento cuando se ingresa una ruta no valida 

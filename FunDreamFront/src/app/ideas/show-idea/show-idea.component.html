@@ -22,6 +22,10 @@
               <p-card>
                 <p style="width: 100%"> <i class="fa fa-line-chart" aria-hidden="true"></i> <strong
                     style="margin-left: 5%"> {{idea.objective | number : fractionSize}} COP</strong> </p>
+
+                    <div style="text-align: right">
+                    <button type="button" pButton label="Apoyar" [routerLink]="['/transaction']"></button>
+                    </div>
               </p-card>
             </div>
           </div>

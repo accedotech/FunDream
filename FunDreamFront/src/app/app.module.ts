@@ -16,7 +16,8 @@ import { NewIdeaComponent } from './ideas/new-idea/new-idea.component';
 import { UserComponent } from './users/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { NewUserComponent } from './register/new-user.component';
-import { ShowIdeaComponent } from './ideas/show-idea/show-idea.component'
+import { ShowIdeaComponent } from './ideas/show-idea/show-idea.component';
+import { TransactionComponent } from './transaction/transaction.component'
 
 
 
@@ -30,7 +31,8 @@ import { ShowIdeaComponent } from './ideas/show-idea/show-idea.component'
     UserComponent,
     AdminComponent,
     NewUserComponent,
-    ShowIdeaComponent
+    ShowIdeaComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,

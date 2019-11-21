@@ -8,7 +8,6 @@ package com.funDream.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -73,6 +72,10 @@ public class Idea implements Serializable {
     
     @OneToMany(mappedBy = "idea")
     private List<Document> documents;  
+    
+    
+    @OneToMany(mappedBy = "idea")
+    private List<Transaction> transaction;  
 
     @NotNull    
     @ManyToMany

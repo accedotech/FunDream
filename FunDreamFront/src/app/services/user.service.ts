@@ -10,7 +10,7 @@ import { Idea } from '../models/idea';
 export class UserService {
 
   headers: HttpHeaders;
-  usersURL = 'http://localhost:8080/api/user'
+  usersURL = 'api/user'
   constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-TYpe': 'application/json' });
   }

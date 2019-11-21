@@ -12,7 +12,7 @@ const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 })
 export class AuthService {
 
-  private authURL = 'http://localhost:8080/api/auth/';
+  private authURL = 'api/auth/';
   
   constructor(private httpClient: HttpClient) { }
 

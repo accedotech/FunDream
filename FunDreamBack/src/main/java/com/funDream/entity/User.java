@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -72,6 +73,9 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "entrepreneurs")        
     @JsonIgnore
     private List<Idea> ideas;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transaction;  
 
         
 }

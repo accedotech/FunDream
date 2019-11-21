@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class IdeaService {
 
   headers: HttpHeaders;
-  ideaURL = 'http://localhost:8080/api/idea'
+  ideaURL = 'api/idea'
 
   constructor(private httpClient: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });

@@ -11,7 +11,7 @@ import { Categories } from '../models/Categories';
 export class CategoriesService {
 
   headers: HttpHeaders;
-  categoriesURL = 'http://localhost:8080/api/categories'
+  categoriesURL = 'api/categories'
 
   constructor(private httpClient: HttpClient) { 
     this.headers = new HttpHeaders({'Content-TYpe': 'application/json'});
