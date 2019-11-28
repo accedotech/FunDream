@@ -10,6 +10,7 @@ import com.funDream.repository.TransactionRepository;
 import com.funDream.service.TransactionService;
 import com.google.gson.Gson;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,21 +59,9 @@ public class TransactionServiceImpl implements TransactionService{
 
     
     @Override
-    public ResponseEntity<?> getAllTransactionByUser(String idUser) {
+    public ResponseEntity<?> getAllTransactionByUser(Long idUser) {
         
-        List<Transaction> transacciones = this.transactionRepository.findByUser(idUser);
-        
-        if(transacciones == null || transacciones.isEmpty()){
-            String mensaje = "No se encontraron transacciones en el sistema.";
-            return new ResponseEntity (mensaje, HttpStatus.NOT_FOUND);
-        }
-        
-        return new ResponseEntity (transacciones, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> getAllTransactionByIdea(String idIdea) {
-        List<Transaction> transacciones = this.transactionRepository.findByIdea(idIdea);
+        List<Transaction> transacciones = this.transactionRepository.findByUser_id(idUser);
         
         if(transacciones == null || transacciones.isEmpty()){
             String mensaje = "No se encontraron transacciones en el sistema.";
@@ -83,9 +72,21 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public ResponseEntity<?> getTransactionById(String idTransaction) {
+    public ResponseEntity<?> getAllTransactionByIdea(Long idIdea) {
+        List<Transaction> transacciones = this.transactionRepository.findByIdea_id(idIdea);
         
-        Transaction transaction = this.transactionRepository.findById(idTransaction);
+        if(transacciones == null || transacciones.isEmpty()){
+            String mensaje = "No se encontraron transacciones en el sistema.";
+            return new ResponseEntity (mensaje, HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity (transacciones, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getTransactionById(Long idTransaction) {
+        
+        Optional <Transaction> transaction = this.transactionRepository.findById(idTransaction);
         
         if(transaction == null){
             String mensaje = "No se encontró la transacción en el sistema.";

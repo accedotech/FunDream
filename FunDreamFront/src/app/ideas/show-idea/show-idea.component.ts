@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IdeaService } from 'src/app/services/idea.service';
-import { Idea } from 'src/app/models/idea';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
 import { Categories } from 'src/app/models/Categories';
 import { Documents } from 'src/app/models/Documents';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CompleteIdeaDTO } from 'src/app/DTO/CompleteIdeaDTO';
 
 @Component({
   selector: 'app-show-idea',
@@ -15,16 +15,20 @@ import { Documents } from 'src/app/models/Documents';
 })
 export class ShowIdeaComponent implements OnInit {
 
-  idea: Idea;
+  idea: CompleteIdeaDTO;
   entrepreneurs: User[] = [];
   categories: Categories[] = [];
+
+  video;
 
   images: any[];
 
   constructor(private activateRoute: ActivatedRoute,              
-              private ideaService: IdeaService
+              private ideaService: IdeaService,
+              private sanitizer: DomSanitizer
               ) { 
-                this.idea = new Idea();
+                this.idea = new CompleteIdeaDTO();
+                
               }
 
   ngOnInit() {
@@ -33,15 +37,18 @@ export class ShowIdeaComponent implements OnInit {
 
   getIdea(){
     this.activateRoute.params.subscribe(param =>{
-      let nameIdea = param['nameIdea'];
-      if(nameIdea){
-        this.ideaService.getIdeaByName(nameIdea).subscribe(
+      let id = param['id'];
+      if(id){
+        this.ideaService.getCompleteIdeaById(id).subscribe(
           response => {
-            this.idea =  response;     
+            this.idea =  response;                 
             this.entrepreneurs = response.entrepreneurs;
             this.categories =  response.categories;
             this.fillGallery(response.documents);
+            this.video = this.sanitizer.bypassSecurityTrustResourceUrl( response.video);
             console.log(response)
+            console.log(this.video);
+            
         }, 
         error => {
 

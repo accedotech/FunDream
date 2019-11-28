@@ -1,46 +1,46 @@
 <div class="container">
-  <p-dataView [value]="this.ideas" [paginator]="true" [rows]="10">
-    <p-header>
-      <p-dropdown placeholder="Sort By" [style]="{'min-width':'140px'}"></p-dropdown>
-    </p-header>
 
-    <ng-template let-idea pTemplate="listItem">
-      <div class="idea">
-        <div class="p-grid">
-          <div class="p-col">
-            <div class="image">
-              <img *ngIf="idea?.principalImage"
-                src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}" alt="" width="100%"
-                height="100%" />
+
+  <div class="p-grid">
+
+    <div class="p-col"  *ngFor="let idea of this.ideas">
+
+
+        <p-card>
+
+            <div class="idea">
+                <div class="image">
+                    <img *ngIf="idea?.principalImage"
+                      src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}" alt="" width="100%"
+                      height="100%" />
+                  </div>
+        
+                      <label class="title"> {{idea.name}} </label>
+                    
+                      
+                      <p *ngFor="let user of idea.entrepreneurs"> <i class="fa fa-user" aria-hidden="true"></i> {{user.firstName}} {{user.lastName}}  </p> 
+                       <p><i class="fa fa-globe" aria-hidden="true"></i>  {{idea.country}}  </p>
+                      
+        
+                      <p> {{idea.description}} </p>
+        
+                       <p-progressBar [showValue] = "true" [value]="idea.progress"></p-progressBar>
+        
+                      <p> <i class="fa fa-line-chart" aria-hidden="true"></i>  {{idea.fundRaised| number : fractionSize}} COP recaudado de: {{idea.objective | number : fractionSize}} COP</p>
+        
+                      <div class="button">
+                        <button pButton type="button" icon="fa fa-search-plus" label="Conocer mas"
+                          [routerLink]="['/show-idea', idea.id]"></button>
+                      </div>
+                   
+        
             </div>
-          </div>
+          </p-card>
 
-          <div class="p-col">
+    </div>
 
-            <div class="header">
-              <h1 class="title">{{idea.name}}</h1>
-            </div>
-            <div class="body">
-              <p style="text-align: justify; margin: 3%;"> {{idea.explanation}} </p>
+  </div>
+  
 
-            </div>
 
-            <div class="footer">
-              <p> <i class="fa fa-line-chart" aria-hidden="true"></i> <strong style="margin-left: 3%">{{idea.objective | number : fractionSize}} COP</strong></p>
-
-              <p><i class="fa fa-globe" aria-hidden="true"></i> <strong style="margin-left: 3%"> {{idea.country}} </strong></p>
-
-              <p><i class="fa fa-registered" aria-hidden="true"></i> <strong style="margin-left: 3%">  {{idea.createdAt | date: 'fullDate'}} </strong> </p>
-
-              <div class="button">
-                <button pButton type="button" icon="fa fa-search-plus" label="Conocer mas"
-                  [routerLink]="['/show-idea', idea.name]"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr style="width: 100%">
-    </ng-template>
-  </p-dataView>
 </div>

@@ -16,7 +16,9 @@ public interface IdeaService {
     
     ResponseEntity saveIdea(MultipartFile[] files, String[] type, String json);
     
-    ResponseEntity getAllIdeas();
+    ResponseEntity getAllIdeasForHome();
+    
+    ResponseEntity getCompleteIdeaById(Long id);
     
     ResponseEntity getIdeaByName(String nameIdea);
 }

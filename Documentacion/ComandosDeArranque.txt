@@ -31,5 +31,5 @@ INSERT INTO FunDream.categories (`id`, `name`) VALUES
 ('8', 'Salud'), 
 ('9', 'Mascotas'), 
 ('10', 'Educación'), 
-('11', 'Ambiental')
+('11', 'Ambiental'),
 ('12', 'Otras');

@@ -19,9 +19,9 @@ public interface TransactionService {
     
     ResponseEntity<?> getAllTransaction();
     
-    ResponseEntity<?> getAllTransactionByUser(String idUser);
+    ResponseEntity<?> getAllTransactionByUser(Long idUser);
     
-    ResponseEntity<?> getAllTransactionByIdea(String idIdea);
+    ResponseEntity<?> getAllTransactionByIdea(Long idIdea);
     
-    ResponseEntity<?> getTransactionById(String idTransaction);
+    ResponseEntity<?> getTransactionById(Long idTransaction);
 }

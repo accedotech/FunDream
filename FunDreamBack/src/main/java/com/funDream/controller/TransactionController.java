@@ -44,18 +44,18 @@ public class TransactionController {
 
     
     @GetMapping("/get-all-by-user/{idUser}")
-    public ResponseEntity<?> getAllTransactionByUser(@PathVariable ("idUser") String idUser) {
+    public ResponseEntity<?> getAllTransactionByUser(@PathVariable ("idUser") Long idUser) {
         return this.transactionService.getAllTransactionByUser(idUser);
     }
 
     
     @GetMapping("/get-all-by-idea/{idIdea}")
-    public ResponseEntity<?> getAllTransactionByIdea(@PathVariable ("idIdea") String idIdea) {
+    public ResponseEntity<?> getAllTransactionByIdea(@PathVariable ("idIdea") Long idIdea) {
         return this.transactionService.getAllTransactionByIdea(idIdea);
     }
 
     @GetMapping("/get-all-by-id/{idTransaction}")
-    public ResponseEntity<?> getTransactionById(@PathVariable("idTransaction") String idTransaction) {
+    public ResponseEntity<?> getTransactionById(@PathVariable("idTransaction") Long idTransaction) {
         return this.transactionService.getTransactionById(idTransaction);
        
     }

@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,11 +48,12 @@ public class Idea implements Serializable {
     private String objective;
     
     @NotNull
-    private String explanation;
+    @Size(min = 1, max = 15000)
+    private String explanation;        
     
     @NotNull
     private String contact;
-    
+
     @NotNull
     private String country;
     
@@ -60,9 +62,15 @@ public class Idea implements Serializable {
     
     private Date createdAt;
     
+    @Size(max = 500)
+    private String description;
+    
+    private String video;
+    
     @NotNull
     @Column(name = "principal_image")
     private String principalImage;
+        
     
     @NotNull    
     @ManyToMany()    

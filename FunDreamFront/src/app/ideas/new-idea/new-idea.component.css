@@ -1,9 +1,20 @@
-.new-ide {
+.titulo {
+    text-align: center;
     width: 100%;
+    color: white;
+    background-color: #007AD9;
+    border-radius: 5px;
 }
 
-.form_idea {
+.new-idea {
+    width: 100%;
     margin-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.form {
+    padding: 3%;
 }
 
 .campo_name {
@@ -26,25 +37,27 @@
     width: 95%;
 }
 
-.categories_input{
+.categories_input {
     margin: 2.5%;
     width: 95%;
 }
 
-.upload_button{
+.upload_button {
     margin: 2%;
     width: 96%;
-    height: 9%;    
+    height: 9%;
     text-align: center;
 }
-.upload_image{
-    border: 2px dotted  lightgrey;
-    background-color: #F7F7F7;
-    margin: 2%; 
+
+.upload_image {
+    border: 2px dotted lightgrey;
+    background-color: #F4F4F4;
+    margin: 2%;
     width: 600px;
-    height: 360px;    
+    height: 360px;
     text-align: center;
 }
+
 .input_name {
     width: 100% !important;
     height: 35px;
@@ -59,30 +72,30 @@
     border: 1px solid #A6A6A6 !important;
 }
 
-:host>>> .ui-spinner .ui-spinner-input {
+:host>>>.ui-spinner .ui-spinner-input {
+    text-align: right;
     width: 100% !important;
     height: 35px;
     border-radius: 0%;
     border: 1px solid #A6A6A6 !important;
 }
 
-:host>>> .ui-multiselect{
+:host>>>.ui-multiselect {
     width: 100% !important;
     height: 36px;
     border-radius: 0%;
     border: 1px solid #A6A6A6 !important;
 }
-:host>>>  .ui-multiselect-filter-container{    
-    border: 1px solid #A6A6A6  !important;
+
+:host>>>.ui-multiselect-filter-container {
+    border: 1px solid #A6A6A6 !important;
 }
 
-
-
-.inputText{        
+.inputText {
     width: 222% !important;
     height: 200px !important;
-  }
-  
+}
+
 .ui-float-label {
     width: 45% !important;
 }
@@ -103,33 +116,32 @@
     margin-top: 1% !important;
 }
 
-
 .placeholder_file {
     cursor: pointer !important;
     text-align: center;
     color: white;
     margin-top: 8px;
     margin-left: 10px;
-  }
-  
-  .button_file { 
+}
+
+.button_file {
     cursor: pointer !important;
-    cursor: pointer; 
+    cursor: pointer;
     position: relative;
-    padding: 0%;    
+    padding: 0%;
     margin-left: 35%;
     width: 180px;
     height: 32px;
-    background-color: #7B95A3;    
-    border: 1px solid #617C8A;
+    background-color: #007AD9;
+    border: 1px solid #116FBF;
     border-radius: 3%;
-  }
+}
 
-  .button_file:hover{
-      background-color:  #617C8A;
-  }
-  
-  .input_file {  
+.button_file:hover {
+    background-color: #116FBF;
+}
+
+.input_file {
     cursor: pointer !important;
     position: absolute;
     top: 0px;
@@ -139,59 +151,89 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-  }
+}
 
-
-
-  .campo_contact {
+.campo_contact {
     margin: 5%;
     width: 90%;
-    }
-  
-    .campo_contact .ui-float-label{
+}
+
+.campo_contact .ui-float-label {
     width: 100% !important;
-    }
-  .input_contact{
+}
+
+.input_contact {
     width: 41.5% !important;
     height: 35px;
     border-radius: 0%;
     border: 1px solid #A6A6A6 !important;
-    }
+}
 
-  .show_contact {
+.show_contact {
     padding: 0%;
     margin: 0%;
     height: 35px;
 }
 
-.save_button{
+.save_button {
     text-align: center;
 }
 
-.text_area .p-grid{
+.text_area .p-grid {
     text-align: center;
 }
 
-.campo_search{
+.campo_search {
     width: 100%;
-    margin-top: 2%;     
-    margin-bottom: 2%; 
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
-.input_search{
-    width: 70% !important;    
+.input_search {
+    width: 70% !important;
     height: 35px;
     border-radius: 0%;
     border: 1px solid #A6A6A6 !important;
 }
 
-.search_entrepreneurs{
+.search_entrepreneurs {
     padding: 0%;
     margin: 0%;
     height: 35px;
 }
 
-.ui-card{
+.ui-card {
     width: 100% !important;
     height: 100% !important;
 }
+
+.inputText {
+    width: 100% !important;
+    height: 100%;
+    margin-bottom: 15%;
+}
+
+.clearButton {
+    width: 100px !important;
+    background-color: #007AD9 !important;
+    color: white !important;
+    margin-right: 3%;
+    padding: 0%;
+    border: 1px solid #116FBF;
+    border-radius: 2px;
+}
+
+.clearButton:hover {
+    background-color: #116FBF;
+    color: white !important;
+}
+
+:host>>>.ui-editor-container {
+    width: 100%;
+    height: 100%;
+}
+
+:host>>>.ui-panel-content {
+    border-radius: 5px !important;
+}
+

@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: NewUserComponent},  
   {path: 'show-idea', component: ShowIdeaComponent},
-  {path: 'show-idea/:nameIdea', component: ShowIdeaComponent},
+  {path: 'show-idea/:id', component: ShowIdeaComponent},
   {path: 'new-idea', component: NewIdeaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},   
   {path: 'transaction', component: TransactionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
   {path: 'admin', component: AdminComponent, canActivate: [guard], data: {expectedRol: ['admin']}},

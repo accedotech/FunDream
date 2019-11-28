@@ -15,6 +15,9 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {CardModule} from 'primeng/card';
 import {DataViewModule} from 'primeng/dataview';
 import {GalleriaModule} from 'primeng/galleria';
+import {EditorModule} from 'primeng/editor';
+import {TooltipModule} from 'primeng/tooltip';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 
 
@@ -37,7 +40,10 @@ import {GalleriaModule} from 'primeng/galleria';
         FileUploadModule,
         CardModule,
         DataViewModule,
-        GalleriaModule
+        GalleriaModule,
+        EditorModule,
+        TooltipModule,
+        ProgressBarModule
     ],
 
     exports: [      
@@ -55,7 +61,10 @@ import {GalleriaModule} from 'primeng/galleria';
       FileUploadModule,
       CardModule,
       DataViewModule,
-      GalleriaModule
+      GalleriaModule,
+      EditorModule,
+      TooltipModule,
+      ProgressBarModule
     ]
 })
 

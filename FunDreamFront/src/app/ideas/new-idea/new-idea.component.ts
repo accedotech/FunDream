@@ -11,7 +11,8 @@ import { User } from 'src/app/models/User';
 import { Idea } from 'src/app/models/idea';
 import Swal from 'sweetalert2';
 import { IdeaService } from 'src/app/services/idea.service';
-import {Message} from 'primeng/components/common/api';
+import { Message } from 'primeng/components/common/api';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -24,14 +25,14 @@ export class NewIdeaComponent implements OnInit {
 
   //Validate form
   form: FormGroup;
-  searchUser:FormGroup;
+  searchUser: FormGroup;
 
   //managge of files 
   mainImage: File;
   showImage: any = '';
   uploadedFiles: File[] = [];
   files = Array<Files>();
-  file: Files =  new Files();
+  file: Files = new Files();
 
   //contact 
   disabledContact: boolean = true;
@@ -41,22 +42,28 @@ export class NewIdeaComponent implements OnInit {
   categories: SelectItem[] = [];
 
   //objects
-  idea: Idea =  new Idea();
+  idea: Idea = new Idea();
   entrepreneurs: User[] = [];
   mainEntrepreneurs: User = new User();
 
   //errors
-  errorMessageSearch: Message [] = [];
-  
+  errorMessageSearch: Message[] = [];
+
+  video: any;
+  mostrarVideo: boolean = null;
+
 
   constructor(private ideaService: IdeaService,
-              private categoriesService: CategoriesService,
-              private userService: UserService, 
-              private tokenService: TokenService,
-              private formBuilder: FormBuilder,
-              private router: Router) {
-                
+    private categoriesService: CategoriesService,
+    private userService: UserService,
+    private tokenService: TokenService,
+    private formBuilder: FormBuilder,
+    private sanitizer: DomSanitizer,
+    private router: Router) {
+
   }
+
+
 
   ngOnInit() {
     this.countries = COUNTRIES;
@@ -64,8 +71,8 @@ export class NewIdeaComponent implements OnInit {
     this.buildForm();
 
     this.form.get('contact').setValue(this.tokenService.getEmail());
-    
-    this.searchMainEntrepreneursByEmail(this.tokenService.getEmail());    
+
+    this.searchMainEntrepreneursByEmail(this.tokenService.getEmail());
   }
 
   private buildForm() {
@@ -74,8 +81,10 @@ export class NewIdeaComponent implements OnInit {
       objective: [0],
       explanation: ['', Validators.compose([Validators.required, Validators.maxLength(5000)])],
       contact: ['', Validators.required],
-      country: ['', Validators.required],      
-      categories: [[], Validators.required],      
+      country: ['', Validators.required],
+      video: [''],
+      description: [''],
+      categories: [[], Validators.required],
     });
 
     this.searchUser = this.formBuilder.group({
@@ -84,7 +93,7 @@ export class NewIdeaComponent implements OnInit {
   }
 
   get validateErrorsForm() { return this.form.controls };
-  get validateSearchUser() { return this.searchUser.controls}
+  get validateSearchUser() { return this.searchUser.controls }
 
   fillSelectCategories() {
     this.categoriesService.getAllCategories().subscribe(response => {
@@ -140,10 +149,10 @@ export class NewIdeaComponent implements OnInit {
     console.log(this.uploadedFiles);
   }
 
-  
-  onRemoveFiles(event) {           
-    for (let i = 0; i < this.uploadedFiles.length; i ++){
-      if(event.file.name ==  this.uploadedFiles[i].name){ 
+
+  onRemoveFiles(event) {
+    for (let i = 0; i < this.uploadedFiles.length; i++) {
+      if (event.file.name == this.uploadedFiles[i].name) {
         this.uploadedFiles.splice(i, 1);
       }
     }
@@ -151,81 +160,81 @@ export class NewIdeaComponent implements OnInit {
   }
 
   onClearFiles() {
-    this.uploadedFiles = [];    
+    this.uploadedFiles = [];
     console.log(this.uploadedFiles);
   }
 
 
   saveIdea() {
-    
-    if(this.errorsForm() == false){
+
+    if (this.errorsForm() == false) {
 
       this.fillFiles();
       this.fillidea();
 
       console.log(this.idea)
 
-    this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
-      console.log(response);
+      this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
+        console.log(response);
 
-      Swal.fire({
-        title: 'Éxito!',
-        text: response,      
-        type: 'success',      
-        confirmButtonColor: '#A3E2C6',      
-        confirmButtonText: 'Continuar'
-      }).then((result) => {
-        if (result.value) {
-          return this.router.navigate(['home']);
-        }
-      });  
+        Swal.fire({
+          title: 'Éxito!',
+          text: response,
+          type: 'success',
+          confirmButtonColor: '#A3E2C6',
+          confirmButtonText: 'Continuar'
+        }).then((result) => {
+          if (result.value) {
+            return this.router.navigate(['home']);
+          }
+        });
 
-     }, 
-     error =>{
-      this.idea.entrepreneurs = [];
-      Swal.fire({
-        title: 'Error!',
-        text: error.error,      
-        type: 'error',      
-        confirmButtonColor: '#A3E2C6',      
-        confirmButtonText: 'Continuar'
-      });        
-     });
-     
-    }else{
+      },
+        error => {
+          this.idea.entrepreneurs = [];
+          Swal.fire({
+            title: 'Error!',
+            text: error.error,
+            type: 'error',
+            confirmButtonColor: '#A3E2C6',
+            confirmButtonText: 'Continuar'
+          });
+        });
+
+    } else {
       Swal.fire('Atención!', 'Aun hay campos incompletos o sin diligenciar.', 'warning');
     }
   }
 
-  fillidea(){    
-    
-    this.idea.name = this.form.value ['name'];
-    this.idea.objective = this.form.value ['objective'];
-    this.idea.explanation = this.form.value ['explanation'];
-    this.idea.country = this.form.value ['country'];
-    this.idea.contact = this.form.value ['contact'];
-    this.idea.categories = this.form.value ['categories'];    
+  fillidea() {
 
-    let users: User[] =  this.entrepreneurs;
+    this.idea.name = this.form.value['name'];
+    this.idea.objective = this.form.value['objective'];
+    this.idea.explanation = this.form.value['explanation'];
+    this.idea.country = this.form.value['country'];
+    this.idea.contact = this.form.value['contact'];
+    this.idea.categories = this.form.value['categories'];
+
+    let users: User[] = this.entrepreneurs;
 
     users.push(this.mainEntrepreneurs);
-    
+
     this.idea.entrepreneurs = users;
-        
-    } 
+
+  }
 
 
-  fillFiles(){    
+  fillFiles() {
     let filesTemp: Files[] = [];
-    for(let i = 0; i < this.uploadedFiles.length; i++){
+    for (let i = 0; i < this.uploadedFiles.length; i++) {
 
-      this.file.file =  this.uploadedFiles[i];
+      this.file.file = this.uploadedFiles[i];
       this.file.type = 'secondary';
 
       filesTemp.push(this.file);
 
       delete this.file;
-      this.file =  new Files();
+      this.file = new Files();
 
     }
 
@@ -236,84 +245,103 @@ export class NewIdeaComponent implements OnInit {
     this.files = filesTemp;
 
     delete this.file;
-    this.file =  new Files();
-    console.log(this.files);         
+    this.file = new Files();
+    console.log(this.files);
   }
 
 
-  editContact(){
-    this.form.get('contact').setValue('');   
-    this.disabledContact =  false;
+  editContact() {
+    this.form.get('contact').setValue('');
+    this.disabledContact = false;
   }
 
-  reloadContact(){
-    this.form.get('contact').setValue(this.tokenService.getEmail()); 
-    this.disabledContact =  true;
+  reloadContact() {
+    this.form.get('contact').setValue(this.tokenService.getEmail());
+    this.disabledContact = true;
   }
 
-  searchMainEntrepreneursByEmail(email: string){
+  searchMainEntrepreneursByEmail(email: string) {
     this.userService.searchUserByEmail(email).subscribe(response => {
-      this.mainEntrepreneurs= response;         
-    }, 
-    error => {
-      Swal.fire('Atención!', 'No se pudo cargar emprendedor por defecto, así que debe buscarlo manualmente.', 'warning');
-    });
-
-  }  
-
-  searchEntrepreneursByEmail(email: string){
-    if(email != ''){
-      this.userService.searchUserByEmail(email).subscribe(response => {
-        this.entrepreneurs.push(response);   
-        this.searchUser.get('emailUser').setValue('');
-      }, 
+      this.mainEntrepreneurs = response;
+    },
       error => {
-        this.errorMessageSearch.push({severity:'error', summary:'Error en la busqueda.', detail: error.error});        
+        Swal.fire('Atención!', 'No se pudo cargar emprendedor por defecto, así que debe buscarlo manualmente.', 'warning');
       });
-    }else{
-      this.errorMessageSearch.push({severity:'warn', summary:'Error en la busqueda.', detail: 'Por favor ingrese un correo.'});        
-      
+
+  }
+
+  searchEntrepreneursByEmail(email: string) {
+    if (email != '') {
+      this.userService.searchUserByEmail(email).subscribe(response => {
+        this.entrepreneurs.push(response);
+        this.searchUser.get('emailUser').setValue('');
+      },
+        error => {
+          this.errorMessageSearch.push({ severity: 'error', summary: 'Error en la busqueda.', detail: error.error });
+        });
+    } else {
+      this.errorMessageSearch.push({ severity: 'warn', summary: 'Error en la busqueda.', detail: 'Por favor ingrese un correo.' });
+
     }
   }
 
-  removeentrepreneurs(email: string){    
-    for(let i = 0; i < this.entrepreneurs.length; i++){
-      if(this.entrepreneurs[i].email == email){
+  removeentrepreneurs(email: string) {
+    for (let i = 0; i < this.entrepreneurs.length; i++) {
+      if (this.entrepreneurs[i].email == email) {
         this.entrepreneurs.splice(i, 1);
       }
     }
   }
 
-  errorsForm(){
+  errorsForm() {
 
-    if(this.form.invalid){
+    if (this.form.invalid) {
       Swal.fire('Atención!', 'Hay información aun sin diligenciar.', 'warning');
       return true;
     }
 
-    if(this.showImage == ''){
+    if (this.showImage == '') {
       Swal.fire('Atención!', 'Debe seleccionar una imagen principal para la idea.', 'warning');
       return true;
-    }    
+    }
 
-    
-    if(this.mainEntrepreneurs == null && this.entrepreneurs.length == 0){
+
+    if (this.mainEntrepreneurs == null && this.entrepreneurs.length == 0) {
       Swal.fire('Atención!', 'Debe seleccionar emprendedores para la idea.', 'warning');
       return true;
     }
-   
+
     return false;
   }
 
-  omitNumbers(event){
-    if(event.charCode >= 48 && event.charCode <= 57){
+  omitNumbers(event) {
+    if (event.charCode >= 48 && event.charCode <= 57) {
       return true;
-     }
-     return false;
+    }
+    return false;
   }
 
-  omitKeys(event){   
-    var pressedKey = event.charCode; 
+  omitKeys(event) {
+    var pressedKey = event.charCode;
     return pressedKey != 32;  //value of the key space 
+  }
+
+
+  validateLinkYouTube(event: string) {
+    if(event.indexOf('watch?v=') > 0){
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(event.replace('watch?v=', 'embed/'));          
+      this.mostrarVideo = true;
+    }else{
+
+      if(event.length > 0){
+        this.mostrarVideo = false;
+        console.log('Link incorrecto');
+      }else{
+        this.mostrarVideo = null;
+      }
+      
+    }
+    
+
   }
 }

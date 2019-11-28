@@ -14,6 +14,8 @@ export class Idea {
     state: string;
     createdAt: Date;
     principalImage: string; 
+    description: string;
+    video: string;
     entrepreneurs: User[];
     categories: Categories[];
     documents: Documents[];

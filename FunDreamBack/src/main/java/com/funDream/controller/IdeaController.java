@@ -40,8 +40,13 @@ public class IdeaController {
     }
 
     @GetMapping()
-    public ResponseEntity getAllIdeas(){
-        return this.ideaService.getAllIdeas();
+    public ResponseEntity getAllIdeasForHome(){
+        return this.ideaService.getAllIdeasForHome();
+    }
+    
+    @GetMapping("/get-idea-by-id/{id}")
+    public ResponseEntity getCompleteIdeaById(@PathVariable ("id") Long id){
+    return this.ideaService.getCompleteIdeaById(id);
     }
     
     @GetMapping("/show-idea/{nameIdea}")

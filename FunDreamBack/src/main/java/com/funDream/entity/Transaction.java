@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "Transaction")
-public abstract class Transaction implements Serializable{
+public class Transaction implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Files } from '../ideas/new-idea/File';
 import { Idea } from '../models/idea';
 import { Observable } from 'rxjs';
+import { IdeaHomeDTO } from '../DTO/IdeaHomeDTO';
+import { CompleteIdeaDTO } from '../DTO/CompleteIdeaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,12 @@ export class IdeaService {
     return this.httpClient.post<string>(this.ideaURL, formData);
   }
 
-  getAllIdeas(): Observable<Idea[]>{
-    return this.httpClient.get<Idea[]>(this.ideaURL, {headers: this.headers});
+  getAllIdeasForHome(): Observable<IdeaHomeDTO[]>{
+    return this.httpClient.get<IdeaHomeDTO[]>(this.ideaURL, {headers: this.headers});
+  }
+
+  getCompleteIdeaById(id: number): Observable<CompleteIdeaDTO>{
+    return this.httpClient.get<CompleteIdeaDTO>(this.ideaURL + '/get-idea-by-id/' + id, {headers: this.headers});
   }
 
   getIdeaByName(nameIdea: string): Observable<Idea>{
