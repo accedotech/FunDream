@@ -1,11 +1,9 @@
-<p-menubar [model]="menu" styleClass="menu">  
+<p-menubar [model]="menu" styleClass="menu">
 </p-menubar>
 <div class="button">
-    <button *ngIf="!isLogin" pButton label="Crear Cuenta" icon="fa fa-user-plus" routerLink='register' class=""></button>
-    <button *ngIf="!isLogin" pButton label="Iniciar Sesión" icon="fa fa-sign-in" routerLink='login' class=""></button>
-    <button *ngIf="isLogin" pButton label="Cerrar Sesión" icon="fa fa-sign-out" (click)="logout()" class=""></button>
-  </div>
-    
-  <router-outlet></router-outlet>
-  
-  
+  <button *ngIf="!isLogin" pButton label="Crear Cuenta" icon="fa fa-user-plus" routerLink='register' class=""></button>
+  <button *ngIf="!isLogin" pButton label="Iniciar Sesión" icon="fa fa-sign-in" routerLink='login' class=""></button>
+  <button *ngIf="isLogin" pButton label="Cerrar Sesión" icon="fa fa-sign-out" (click)="logout()" class=""></button>
+</div>
+
+<router-outlet></router-outlet>

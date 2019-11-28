@@ -6,6 +6,7 @@ import { Categories } from 'src/app/models/Categories';
 import { Documents } from 'src/app/models/Documents';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CompleteIdeaDTO } from 'src/app/DTO/CompleteIdeaDTO';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-show-idea',
@@ -21,13 +22,15 @@ export class ShowIdeaComponent implements OnInit {
 
   video;
 
-  images: any[];
+  images: any[] = [];
+
+  daysToEnd: number;
 
   constructor(private activateRoute: ActivatedRoute,              
               private ideaService: IdeaService,
               private sanitizer: DomSanitizer
               ) { 
-                this.idea = new CompleteIdeaDTO();
+                this.idea = new CompleteIdeaDTO();                
                 
               }
 
@@ -45,9 +48,10 @@ export class ShowIdeaComponent implements OnInit {
             this.entrepreneurs = response.entrepreneurs;
             this.categories =  response.categories;
             this.fillGallery(response.documents);
-            this.video = this.sanitizer.bypassSecurityTrustResourceUrl( response.video);
-            console.log(response)
-            console.log(this.video);
+            this.video = this.sanitizer.bypassSecurityTrustResourceUrl( response.video.replace('watch?v=', 'embed/'));          
+            
+            this.daysToEnd = moment(response.campaignFinishedDate).diff(new Date(), 'days');
+                        
             
         }, 
         error => {
@@ -61,7 +65,7 @@ export class ShowIdeaComponent implements OnInit {
     this.images = [];
     
     for(let document of documents){
-      this.images.push({source:'http://localhost:8080/api/document/show-image/'+document.nameFile, title:this.idea.name});
+      this.images.push({source:'http://localhost:8080/api/document/show-image/'+document.nameFile, title:this.idea.name});      
     }
   }
 }

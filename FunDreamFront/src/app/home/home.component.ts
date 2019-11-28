@@ -28,9 +28,7 @@ export class HomeComponent implements OnInit {
   getAllIdeas(){
     
     this.ideaSerices.getAllIdeasForHome().subscribe(response =>{
-      this.ideas =  response;   
-      console.log(response);
-       
+      this.ideas =  response;               
       
     }, 
     error=>{

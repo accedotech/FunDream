@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 import { IdeaService } from 'src/app/services/idea.service';
 import { Message } from 'primeng/components/common/api';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -79,12 +81,13 @@ export class NewIdeaComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       objective: [0],
-      explanation: ['', Validators.compose([Validators.required, Validators.maxLength(5000)])],
+      explanation: ['', Validators.compose([Validators.required, Validators.maxLength(15000)])],
       contact: ['', Validators.required],
       country: ['', Validators.required],
       video: [''],
-      description: [''],
+      description: ['', Validators.maxLength(500)],
       categories: [[], Validators.required],
+      campaignDays: [30, Validators.compose([Validators.min(20), Validators.max(120)])]
     });
 
     this.searchUser = this.formBuilder.group({
@@ -117,7 +120,7 @@ export class NewIdeaComponent implements OnInit {
     reader.onloadend = (_event) => {
       this.showImage = reader.result;
     }
-    console.log(this.mainImage)
+    
   }
 
   onSelectFiles(event) {
@@ -146,7 +149,7 @@ export class NewIdeaComponent implements OnInit {
       }
     }
 
-    console.log(this.uploadedFiles);
+    
   }
 
 
@@ -156,12 +159,11 @@ export class NewIdeaComponent implements OnInit {
         this.uploadedFiles.splice(i, 1);
       }
     }
-    console.log(this.uploadedFiles);
+    
   }
 
   onClearFiles() {
-    this.uploadedFiles = [];
-    console.log(this.uploadedFiles);
+    this.uploadedFiles = [];    
   }
 
 
@@ -170,12 +172,9 @@ export class NewIdeaComponent implements OnInit {
     if (this.errorsForm() == false) {
 
       this.fillFiles();
-      this.fillidea();
+      this.fillidea();      
 
-      console.log(this.idea)
-
-      this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {
-        console.log(response);
+      this.ideaService.saveIdea(this.files, this.idea).subscribe(response => {        
 
         Swal.fire({
           title: 'Éxito!',
@@ -214,6 +213,15 @@ export class NewIdeaComponent implements OnInit {
     this.idea.country = this.form.value['country'];
     this.idea.contact = this.form.value['contact'];
     this.idea.categories = this.form.value['categories'];
+    this.idea.description = this.form.value['description'];
+    
+    if(this.mostrarVideo == true){
+      this.idea.video = this.form.value['video'];
+    }else{
+      this.idea.video = '';
+    }
+        
+    this.idea.campaignFinishedDate =  moment(new Date()).add(this.form.value['campaignDays'], 'days').toDate();    
 
     let users: User[] = this.entrepreneurs;
 
@@ -245,8 +253,7 @@ export class NewIdeaComponent implements OnInit {
     this.files = filesTemp;
 
     delete this.file;
-    this.file = new Files();
-    console.log(this.files);
+    this.file = new Files();    
   }
 
 
@@ -329,17 +336,15 @@ export class NewIdeaComponent implements OnInit {
 
   validateLinkYouTube(event: string) {
     if(event.indexOf('watch?v=') > 0){
-      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(event.replace('watch?v=', 'embed/'));          
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(event.replace('watch?v=', 'embed/'));
       this.mostrarVideo = true;
     }else{
 
       if(event.length > 0){
-        this.mostrarVideo = false;
-        console.log('Link incorrecto');
+        this.mostrarVideo = false;        
       }else{
         this.mostrarVideo = null;
-      }
-      
+      }      
     }
     
 

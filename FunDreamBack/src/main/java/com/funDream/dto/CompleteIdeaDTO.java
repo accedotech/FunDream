@@ -34,6 +34,7 @@ public class CompleteIdeaDTO {
     private String country;
     private String state;
     private Date createdAt;
+    private Date campaignFinishedDate;
     private String description;
     private String video;
     private String principalImage;

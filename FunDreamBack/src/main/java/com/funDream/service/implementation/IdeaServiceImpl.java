@@ -189,6 +189,7 @@ public class IdeaServiceImpl implements IdeaService{
             completeIdeaDTO.setCountry(idea.get().getCountry());
             completeIdeaDTO.setState(idea.get().getState());
             completeIdeaDTO.setCreatedAt(idea.get().getCreatedAt());
+            completeIdeaDTO.setCampaignFinishedDate(idea.get().getCampaignFinishedDate());
             completeIdeaDTO.setDescription(idea.get().getDescription());  
             completeIdeaDTO.setVideo(idea.get().getVideo());
             completeIdeaDTO.setPrincipalImage(idea.get().getPrincipalImage());                      
@@ -204,6 +205,17 @@ public class IdeaServiceImpl implements IdeaService{
             return new ResponseEntity(completeIdeaDTO, HttpStatus.OK);
     }
     
+    @Override
+    public ResponseEntity getIdeaById(Long id) {
+        
+        Optional<Idea> idea =  this.ideaRepository.findById(id);
+        
+        if(idea == null || !idea.isPresent()){
+            return new ResponseEntity("La idea no fue encontrada en el sistema.", HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity(idea.get(), HttpStatus.OK);
+    }
 
     @Override
     public ResponseEntity getIdeaByName(String nameIdea) {

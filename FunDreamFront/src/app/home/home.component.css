@@ -11,6 +11,7 @@
 
 :host >>> .ui-card{
     width: 400px;
+    height: 800px;
     padding: 0px;
 }
 
@@ -26,7 +27,7 @@
 
 .title{              
     margin-top: 5px;
-    color: #007AD9;            
+    color: #007AD9;
     font-size: 20px;
 
 }

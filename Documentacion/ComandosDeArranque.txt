@@ -13,6 +13,7 @@ ALTER TABLE FunDream.rel_user_idea ENGINE = InnoDB;
 ALTER TABLE FunDream.role ENGINE = InnoDB;
 ALTER TABLE FunDream.user ENGINE = InnoDB;
 ALTER TABLE FunDream.user_role ENGINE = InnoDB;
+ALTER TABLE FunDream.Transaction ENGINE = InnoDB;
 
 //INSERTAR LOS ROLES EN LA TABLA ROLE DE LA BASE DE DATOS 
 
@@ -32,4 +33,5 @@ INSERT INTO FunDream.categories (`id`, `name`) VALUES
 ('9', 'Mascotas'), 
 ('10', 'Educación'), 
 ('11', 'Ambiental'),
-('12', 'Otras');
+('12', 'Musica'),
+('13', 'Otras');

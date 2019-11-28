@@ -48,6 +48,11 @@ public class IdeaController {
     public ResponseEntity getCompleteIdeaById(@PathVariable ("id") Long id){
     return this.ideaService.getCompleteIdeaById(id);
     }
+
+    @GetMapping("/get-idea/{id}")
+    public ResponseEntity getIdeaById(@PathVariable ("id") Long id){
+    return this.ideaService.getIdeaById(id);
+    }    
     
     @GetMapping("/show-idea/{nameIdea}")
     public ResponseEntity getIdeaByName(@PathVariable ("nameIdea") String nameIdea){

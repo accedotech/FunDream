@@ -1,0 +1,29 @@
+.suport{
+    width: 100%;
+    height: 100%;
+    padding-top: 2%;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 2%;    
+}
+
+.p-col-fixed{
+    width: 250px;
+}
+
+.p-col{
+    margin: 0%;
+    padding: 0%;
+}
+
+.image{
+    text-align: center;
+    width: 200px;
+    height: 125px;
+}
+
+
+.imageFunDream{
+    width: 100px;
+    height: 125px;
+}

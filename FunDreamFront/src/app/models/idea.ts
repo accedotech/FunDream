@@ -13,6 +13,7 @@ export class Idea {
     country: string;
     state: string;
     createdAt: Date;
+    campaignFinishedDate: Date;
     principalImage: string; 
     description: string;
     video: string;

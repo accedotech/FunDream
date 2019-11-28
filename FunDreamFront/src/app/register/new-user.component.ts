@@ -70,9 +70,7 @@ export class NewUserComponent implements OnInit {
 
     if(this.form.invalid != true){
 
-      let newUser: NewUser = this.fillUser();
-
-      console.log(newUser);
+      let newUser: NewUser = this.fillUser();      
     
     this.authService.saveUser(newUser).subscribe(response => {
             

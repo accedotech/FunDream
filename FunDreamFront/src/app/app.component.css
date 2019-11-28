@@ -2,12 +2,12 @@
 :host >>> .menu .ui-menuitem {    
 }
 
-.button{
-    width: 100%;
+.button{    
     text-align: right; 
     margin-top:1%;
+    margin-right:2%;
 }
 
 .button button{    
-    margin-left: 1%;    
+    margin-left: 2%;    
 }

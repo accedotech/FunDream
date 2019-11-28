@@ -20,5 +20,7 @@ public interface IdeaService {
     
     ResponseEntity getCompleteIdeaById(Long id);
     
+    ResponseEntity getIdeaById(Long id);
+    
     ResponseEntity getIdeaByName(String nameIdea);
 }

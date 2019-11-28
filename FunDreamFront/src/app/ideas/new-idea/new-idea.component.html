@@ -1,153 +1,178 @@
 <div class="new-idea">
-  <form [formGroup]="form">
 
-    <div class="titulo">
-      <h1>
-        <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-        Crear idea nueva
-      </h1>
-    </div>
+  <div class="titulo">
+    <h1>
+      <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+      Crear idea nueva
+    </h1>
+  </div>
 
+  <div class="form">
+    <form [formGroup]="form">
 
-    <div class="form">
+      <p-card>
 
-
-      <div class="p-grid">
-        <div class="p-col">
-
-
-          <!-- Name idea-->
-          <div class="campo_name">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></span>
-              <span class="ui-float-label">
-                <input type="text" pInputText autocomplete="off"
-                  pTooltip="El nombre debería reflejar la esencia del idea." formControlName="name" class="input_name">
-                <label for="float-input">Nombre de la idea</label>
-              </span>
-            </div>
-
-            <div *ngIf="!!validateErrorsForm.name.touched && !!validateErrorsForm.name.errors" style="margin-top: 1%">
-              <p-message severity="error" text="El nombre de la idea es requerido"
-                *ngIf="!!validateErrorsForm.name.errors.required"></p-message>
-            </div>
-          </div>
-
-          <!-- Objective-->
-          <div class="campos_input">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
-              <span class="ui-float-label">
-                <p-spinner size="30" formControlName="objective" [min]="1" (keypress)="omitNumbers($event)"
-                  [formatInput]="true" thosandSeparator="," decimalSeparator="." placeholder=" "
-                  pTooltip="Especifique cuánto dinero necesita para implementar el idea. Ingrese una cantidad específica redondeada a pesos.">
-                </p-spinner>
-                <label for="float-input">Objetivo a alcanzar</label>
-              </span>
-            </div>
-          </div>
-
-
-          <!-- Country -->
-          <div class="select_input">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon"> <i class="fa fa-globe" aria-hidden="true"></i> </span>
-              <span class="ui-float-label">
-                <p-dropdown [options]="countries" placeholder=" " [filter]="true" formControlName="country"
-                  autowidth="false"
-                  [style]="{'width': '100%',  'height': '35px', 'border-radius': '0',  'border': '1px solid #A6A6A6'}"
-                  pTooltip="Seleccione el país donde se llevara acabo el idea.">
-                </p-dropdown>
-                <label for="float-input">País de la idea</label>
-              </span>
-            </div>
-
-            <div *ngIf="!!validateErrorsForm.country.touched && !!validateErrorsForm.country.errors"
-              style="margin-top: 1%">
-              <p-message severity="error" text="Selecciones el país de la idea"
-                *ngIf="!!validateErrorsForm.country.errors.required"></p-message>
-            </div>
-
-
-          </div>
-
-
-          <!-- Contact-->
-          <div class="campo_contact">
-            <div class="ui-inputgroup">
-              <span class="ui-inputgroup-addon"><i class="fa fa-comments" aria-hidden="true"></i></span>
-              <span class="ui-float-label">
-                <input type="text" pInputText autocomplete="off" formControlName="contact" [readonly]="disabledContact"
-                  class="input_contact"
-                  pTooltip="Como contacto puede especificar sus redes sociales o un link a un sitio web, por defecto se carga el correo del creador.">
-                <button pButton type="button" icon="fa fa-pencil" class="show_contact" (click)="editContact()"
-                  *ngIf="disabledContact"></button>
-                <button pButton type="button" icon="fa fa-undo" class="show_contact" (click)="reloadContact()"
-                  *ngIf="!disabledContact"
-                  pTooltip="Como contacto puede especificar sus redes sociales o un link a un sitio web, por defecto se carga el correo del creador."></button>
-                <label for="float-input">Contacto</label>
-              </span>
-            </div>
-
-            <div *ngIf="!!validateErrorsForm.contact.touched && !!validateErrorsForm.contact.errors"
-              style="margin-top: 1%">
-              <p-message severity="error" text="El contacto es requerido"
-                *ngIf="!!validateErrorsForm.contact.errors.required"></p-message>
-            </div>
-          </div>
-
-
-          <!-- main Description-->
-          <div class="text_area">
+        <h3>Información de campaña</h3>
+        <!-- Name idea-->
+        <div class="campo_name">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></span>
             <span class="ui-float-label">
-              <textarea formControlName="explanation" pInputTextarea class="inputText"
-                pTooltip="De una breve descripción, o una explicación de sus razones para hacer este crowdfunding. Algo que ."></textarea>
-              <label for="float-input">Descripción </label>
+              <input type="text" pInputText autocomplete="off"
+                pTooltip="El nombre debería reflejar la esencia de la idea." formControlName="name" class="input_name">
+              <label for="float-input">Nombre de la idea</label>
             </span>
           </div>
-        </div>
-      </div>
 
-
-      <div class="p-col">
-        <div class="upload_image">
-          <img *ngIf="this.showImage" src="{{this.showImage}}" alt="imagen" width="100%" height="100%" />
-        </div>
-
-        <div class="button_file">
-          <i class="fa fa-upload placeholder_file" aria-hidden="true"></i>
-          <label class="placeholder_file">Seleccionar imagen</label>
-          <input type="file" icon (change)="selcetImage($event)" accept="image/*" style="height:100%" class="input_file"
-            pTooltip="Esta será la imagen principal con la que se publicará su idea." />
+          <div *ngIf="!!validateErrorsForm.name.touched && !!validateErrorsForm.name.errors" style="margin-top: 1%">
+            <p-message severity="error" text="El nombre de la idea es requerido"
+              *ngIf="!!validateErrorsForm.name.errors.required"></p-message>
+          </div>
         </div>
 
 
-      </div>
-    </div>
+        <div class="p-grid">
+          <div class="p-col">
+
+            <!-- Objective-->
+            <div class="campos_input">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+                <span class="ui-float-label">
+                  <p-spinner size="30" formControlName="objective" [min]="1" (keypress)="omitNumbers($event)"
+                    [formatInput]="true" thosandSeparator="," decimalSeparator="." placeholder=" "
+                    pTooltip="Especifique cuánto dinero necesita para implementar el idea. Ingrese una cantidad específica redondeada a pesos.">
+                  </p-spinner>
+                  <label for="float-input">Objetivo a alcanzar</label>
+                </span>
+              </div>
+            </div>
+
+
+            <!-- Country -->
+            <div class="select_input">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"> <i class="fa fa-globe" aria-hidden="true"></i> </span>
+                <span class="ui-float-label">
+                  <p-dropdown [options]="countries" placeholder=" " [filter]="true" formControlName="country"
+                    autowidth="false" pTooltip="Seleccione el país donde se llevara acabo el idea.">
+                  </p-dropdown>
+                  <label for="float-input">País de la idea</label>
+                </span>
+              </div>
+
+              <div *ngIf="!!validateErrorsForm.country.touched && !!validateErrorsForm.country.errors"
+                style="margin-top: 1%">
+                <p-message severity="error" text="Selecciones el país de la idea"
+                  *ngIf="!!validateErrorsForm.country.errors.required"></p-message>
+              </div>
+
+
+            </div>
+
+
+            <!-- Contact-->
+            <div class="campo_contact">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-comments" aria-hidden="true"></i></span>
+                <span class="ui-float-label">
+                  <input type="text" pInputText autocomplete="off" formControlName="contact"
+                    [readonly]="disabledContact" class="input_contact"
+                    pTooltip="Como contacto puede especificar sus redes sociales o un link a un sitio web, por defecto se carga el correo del creador.">
+                  <button pButton type="button" icon="fa fa-pencil" class="show_contact" (click)="editContact()"
+                    *ngIf="disabledContact"></button>
+                  <button pButton type="button" icon="fa fa-undo" class="show_contact" (click)="reloadContact()"
+                    *ngIf="!disabledContact"
+                    pTooltip="Como contacto puede especificar sus redes sociales o un link a un sitio web, por defecto se carga el correo del creador."></button>
+                  <label for="float-input">Contacto</label>
+                </span>
+              </div>
+
+              <div *ngIf="!!validateErrorsForm.contact.touched && !!validateErrorsForm.contact.errors"
+                style="margin-top: 1%">
+                <p-message severity="error" text="El contacto es requerido"
+                  *ngIf="!!validateErrorsForm.contact.errors.required"></p-message>
+              </div>
+            </div>
+
+
+            <!-- main Description-->
+            <div class="text_area">
+              <span class="ui-float-label">
+                <textarea pInputTextarea formControlName="description" class="textArea"
+                  pTooltip="Lo que escriba acá es lo que los visiantes verán de su idea en la página principal. De una explicación cuativadora de su proyecto o explique sus razones para emprender esta campaña de crowfunding de manera que pueda atraer visitantes."></textarea>
+                <label for="float-input">Descripción de enganche:</label>
+              </span>
+              <div style="margin-top: 1%">
+                <p-message severity="error" text="Esta descripción no puede tener más de 500 caracteres."
+                  *ngIf="this.form.value['description'].length > 500"></p-message>
+              </div>
+            </div>
+
+            <div class="duracion">
+              <strong> Duración: </strong>
+              <p>Tu campaña crowfunding estará abierta por {{this.form.value ['campaignDays']}} días</p>
+              <p-slider formControlName="campaignDays" [min]="1" [max]="120"></p-slider>
+
+              <div *ngIf="!!validateErrorsForm.campaignDays.invalid" style="margin-top: 1%">
+                <p-message severity="error" text="La campaña debe durar minimo 20 días."
+                  *ngIf="!!validateErrorsForm.campaignDays.errors.min"></p-message>
+                <p-message severity="error" text="La campaña debe durar maximo 120 días."
+                  *ngIf="!!validateErrorsForm.campaignDays.errors.max"></p-message>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="p-col">
+
+            <div class="upload_image">
+              <img *ngIf="this.showImage" src="{{this.showImage}}" alt="imagen" width="100%" height="100%" />
+            </div>
+
+            <div class="button_file">
+              <i class="fa fa-upload placeholder_file" aria-hidden="true"></i>
+              <label class="placeholder_file">Seleccionar imagen</label>
+              <input type="file" icon (change)="selcetImage($event)" accept="image/*" style="height:100%"
+                class="input_file" pTooltip="Esta será la imagen principal con la que se publicará su idea." />
+            </div>
+
+          </div>
+
+        </div>
+      </p-card>
+
+      <br style="margin: 3%;">
+
+      <p-card>
+
+        <h3>Explicación de la idea</h3>
+        <!-- Categories-->
+        <div class="categories_input">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"> <i class="fa fa-tags" aria-hidden="true"></i> </span>
+            <p-multiSelect [options]="categories" formControlName="categories" maxSelectedLabels="15"
+              defaultLabel="Categorías"
+              pTooltip="Seleccione a que categorias pertenece su idea. Puede seleccionar mas de 1 categoria.">
+            </p-multiSelect>
+          </div>
+          <div *ngIf="!!validateErrorsForm.categories.touched && !!validateErrorsForm.categories.errors"
+            style="margin-top: 1%">
+            <p-message severity="error" text="La idea debe pertenecer al menos a una categoria."
+              *ngIf="!!validateErrorsForm.categories.errors.required"></p-message>
+          </div>
+        </div>
 
 
 
-    <!-- Categories-->
-    <div class="categories_input">
-      <div class="ui-inputgroup">
-        <span class="ui-inputgroup-addon"> <i class="fa fa-tags" aria-hidden="true"></i> </span>
-        <p-multiSelect [options]="categories" formControlName="categories" maxSelectedLabels="15"
-          defaultLabel="Categorías"
-          pTooltip="Seleccione a que categorias pertenece su idea. Puede seleccionar mas de 1 categoria.">
-        </p-multiSelect>
-      </div>
-      <div *ngIf="!!validateErrorsForm.categories.touched && !!validateErrorsForm.categories.errors"
-        style="margin-top: 1%">
-        <p-message severity="error" text="La idea debe pertenecer al menos a una categoria."
-          *ngIf="!!validateErrorsForm.categories.errors.required"></p-message>
-      </div>
-
-
-
-      <!-- Explanation-->
-      <div class="text_area">
+        <!-- Explanation-->
         <div class="inputText">
-          <label style="color: gray"> <strong> Explica tu idea </strong> </label>
+          <strong> Explica tu idea: </strong>
+          <div *ngIf="!!validateErrorsForm.explanation.touched && !!validateErrorsForm.explanation.errors"
+            style="margin-top: 1%; margin-bottom: 1%;">
+            <p-message severity="error" text="La idea debe tener una breve explicación."
+              *ngIf="!!validateErrorsForm.explanation.errors.required"></p-message>
+          </div>
           <p-editor formControlName="explanation" defaultLabel="Categorías"
             pTooltip="Describa su proyecto en este editor de texto.">
             <p-header>
@@ -160,7 +185,6 @@
                   <button class="ql-bold"></button>
                   <button class="ql-italic"></button>
                   <button class="ql-underline"></button>
-                  <button class="ql-strike"></button>
                 </span>
                 <span class="ql-formats">
                   <select class="ql-color"></select>
@@ -173,11 +197,8 @@
                 <span class="ql-formats">
                   <button class="ql-list" value="ordered"></button>
                   <button class="ql-list" value="bullet"></button>
-                  <button class="ql-indent" value="-1"></button>
-                  <button class="ql-indent" value="+1"></button>
                 </span>
                 <span class="ql-formats">
-                  <button class="ql-direction" value="rtl"></button>
                   <select class="ql-align"></select>
                 </span>
                 <button class="clearButton" ype="button" (click)="this.form.get('explanation').setValue('')">
@@ -188,73 +209,78 @@
             </p-header>
           </p-editor>
         </div>
-        <div *ngIf="!!validateErrorsForm.explanation.touched && !!validateErrorsForm.explanation.errors"
-          style="margin-top: 1%">
-          <p-message severity="error" text="La idea debe tener una breve explicación."
-            *ngIf="!!validateErrorsForm.explanation.errors.required"></p-message>
+
+
+        <div class="uploadFiles">
+          <strong> Seleccione fotos de su idea: </strong>
+          <p-fileUpload chooseLabel="Seleccionar archivos" cancelLabel="Cancelar" [showUploadButton]="false"
+            (onSelect)="onSelectFiles($event)" (onRemove)="onRemoveFiles($event)" (onClear)="onClearFiles()"
+            multiple="multiple" accept="image/*" maxFileSize="10485760"
+            invalidFileSizeMessageDetail="El tamaño maximo del archivo debe ser de 10 MB."
+            invalidFileSizeMessageSummary="{0} / Error: " pTooltip="Adjunte fotos relacioandas con su idea.">
+
+          </p-fileUpload>
         </div>
 
-      </div>
+        <div class="campo_name">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>
+            <span class="ui-float-label">
+              <input type="text" pInputText autocomplete="off" formControlName="video"
+                (input)="this.validateLinkYouTube($event.target.value)" class="input_name"
+                pTooltip="Coloque el link de un video que tenga en YouTube acerca de su proyecto.">
+              <label for="float-input">Link de video de YouTube</label>
+            </span>
+          </div>
 
-
-      <div class="text_area">
-        <p-fileUpload chooseLabel="Seleccionar archivos" cancelLabel="Cancelar" [showUploadButton]="false"
-          (onSelect)="onSelectFiles($event)" (onRemove)="onRemoveFiles($event)" (onClear)="onClearFiles()"
-          multiple="multiple" accept="image/*" maxFileSize="10485760"
-          invalidFileSizeMessageDetail="El tamaño maximo del archivo debe ser de 10 MB."
-          invalidFileSizeMessageSummary="{0} / Error: " pTooltip="Adjunte fotos relacioandas con su idea.">
-
-        </p-fileUpload>
-      </div>
-
-      <div class="campo_contact">
-        <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>
-          <span class="ui-float-label">
-            <input type="text" pInputText autocomplete="off" formControlName="video"
-              (input)="this.validateLinkYouTube($event.target.value)" class="input_contact"
-              pTooltip="Coloque el link de un video que tenga en YouTube acerca de su proyecto.">
-            <label for="float-input">Video</label>
-          </span>
+          <div *ngIf="this.mostrarVideo == false" style="margin-top: 1%;">
+            <p-message severity="warn" text="El link no pudo ser procesado."></p-message>
+          </div>
         </div>
-      </div>
 
-      <iframe *ngIf="this.mostrarVideo" width="560" height="315" [src]="video" frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video">
+          <iframe *ngIf="this.mostrarVideo == true" width="560" height="315" [src]="video" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
 
-      <div class="text_area">
+      </p-card>
+
+      <br style="margin: 3%;">
+
+      <p-card>
 
         <h3>Emprendedores</h3>
 
+        <div class="entrepreneur">
+          <div class="p-grid">
 
+            <div class="p-col">
+              <div style="text-align: justify">
+                <strong style="color: #007AD9">Creador</strong>
+                <p><label>{{this.mainEntrepreneurs.firstName}}</label></p>
+                <p><label>{{this.mainEntrepreneurs.lastName}}</label></p>
+                <p><label>{{this.mainEntrepreneurs.email}}</label></p>
+                <p><label>{{this.mainEntrepreneurs.country}}</label></p>
+              </div>
+            </div>
 
-        <div class="p-grid">
+            <div *ngFor="let entrepreneur of this.entrepreneurs" class="p-col">
+              <div style="text-align: justify">
+                <strong style="color: #007AD9">Creador</strong>
+                <p><label>{{entrepreneur.firstName}}</label></p>
+                <p><label>{{entrepreneur.lastName}}</label></p>
+                <p><label>{{entrepreneur.email}}</label></p>
+                <p><label>{{entrepreneur.country}}</label></p>
+                <p-footer>
+                  <button pButton type="button" label="Eliminar" icon="fa fa-times"
+                    (click)="removeentrepreneurs(entrepreneur.email)"></button>
+                </p-footer>
+              </div>
+            </div>
 
-          <div class="p-col">
-            <p-card>
-              <h3>Emprendedor</h3>
-              <p><label>{{this.mainEntrepreneurs.firstName}}</label></p>
-              <p><label>{{this.mainEntrepreneurs.lastName}}</label></p>
-              <p><label>{{this.mainEntrepreneurs.email}}</label></p>
-              <p><label>{{this.mainEntrepreneurs.country}}</label></p>
-            </p-card>
-          </div>
-
-          <div *ngFor="let entrepreneur of this.entrepreneurs" class="p-col">
-            <p-card>
-              <h3>Emprendedor</h3>
-              <p><label>{{entrepreneur.firstName}}</label></p>
-              <p><label>{{entrepreneur.lastName}}</label></p>
-              <p><label>{{entrepreneur.email}}</label></p>
-              <p><label>{{entrepreneur.country}}</label></p>
-              <p-footer>
-                <button pButton type="button" label="Eliminar" icon="fa fa-times"
-                  (click)="removeentrepreneurs(entrepreneur.email)"></button>
-              </p-footer>
-            </p-card>
-          </div>
-
+          </div>          
         </div>
+        <hr style="width: 100%;">
 
         <div class="campo_search">
           <form [formGroup]="searchUser">
@@ -273,13 +299,17 @@
           </div>
           <p-messages [(value)]="errorMessageSearch"></p-messages>
         </div>
+
+
+      </p-card>
+
+
+      <div class="save_button">
+        <button pButton type="button" icon="fa fa-check" label="Crear idea" (click)="saveIdea()"
+          class="ui-button-success"></button>
       </div>
-    </div>
 
-    <div class="save_button">
-      <button pButton type="button" icon="fa fa-check" label="Crear idea" (click)="saveIdea()"
-        class="ui-button-success"></button>
-    </div>
-
-  </form>
+    </form>
+  </div>
+  <br>
 </div>

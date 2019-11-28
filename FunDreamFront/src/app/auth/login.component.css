@@ -42,3 +42,10 @@
 .campos_input p-message {
     margin-top: 2%;
 }
+
+
+:host>>> .ui-panel-titlebar{
+    background-color: #007AD9 !important;
+    color: white !important;
+    border: 1px solid #F4F4F4; 
+}

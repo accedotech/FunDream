@@ -62,6 +62,9 @@ public class Idea implements Serializable {
     
     private Date createdAt;
     
+    @NotNull
+    private Date campaignFinishedDate;
+    
     @Size(max = 500)
     private String description;
     

@@ -18,6 +18,7 @@ import {GalleriaModule} from 'primeng/galleria';
 import {EditorModule} from 'primeng/editor';
 import {TooltipModule} from 'primeng/tooltip';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {SliderModule} from 'primeng/slider';
 
 
 
@@ -43,7 +44,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
         GalleriaModule,
         EditorModule,
         TooltipModule,
-        ProgressBarModule
+        ProgressBarModule,
+        SliderModule
     ],
 
     exports: [      
@@ -64,7 +66,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
       GalleriaModule,
       EditorModule,
       TooltipModule,
-      ProgressBarModule
+      ProgressBarModule,
+      SliderModule
     ]
 })
 

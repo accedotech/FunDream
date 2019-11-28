@@ -13,6 +13,7 @@ export class CompleteIdeaDTO{
     country: string;
     state: string;
     createdAt: Date;
+    campaignFinishedDate: Date;
     description: string;
     video: string;
     principalImage: string;

@@ -1,3 +1,51 @@
-<p>
-  transaction works!
-</p>
+<div class="suport">
+
+  <p> Recompensas impagas </p>
+  <p-card>
+
+      <div class="p-grid">
+
+          <div class="p-col-fixed">
+          
+              <div class="image">
+                  <img *ngIf="idea?.principalImage" src="http://localhost:8080/api/document/show-image/{{idea.principalImage}}"
+                    alt="" width="100%" height="100%"/>
+                </div>          
+          </div>
+          <div class="p-col">
+              <p style="color: #007AD9; font-size: 20px;"> {{idea.name}} </p>              
+          </div>
+
+          <div class="p-col">
+            
+            </div>
+      </div>
+
+      
+
+  </p-card>
+
+  <p>Soporte adicional para FunDream</p>
+  <p-card>
+      <div class="p-col-fixed">
+          
+          
+              <div class="imageFunDream">
+                  <img src="/assets/img/FundDreamLogo.png"
+                    alt="" width="100%" height="100%"/>
+                </div>
+              
+      </div>
+      <div class="p-col">
+          <p style="color: #007AD9; font-size: 20px;"> Soporte FunDream </p>
+          <label style="text-align: justify;"> Su apoyo adicional nos ayudará a promover proyectos utilizando nuestros canales de redes sociales. ¡También nos ayudará a desarrollar nuevas características que ayudarán a hacer realidad más proyectos! Este soporte adicional es voluntario y no reembolsable</label>
+          
+      </div>
+
+      <div class="p-col">
+        
+        </div>
+
+   
+  </p-card>
+</div>

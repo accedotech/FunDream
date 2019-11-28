@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'show-idea', component: ShowIdeaComponent},
   {path: 'show-idea/:id', component: ShowIdeaComponent},
   {path: 'new-idea', component: NewIdeaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},   
-  {path: 'transaction', component: TransactionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+  {path: 'transaction/:id', component: TransactionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
   {path: 'admin', component: AdminComponent, canActivate: [guard], data: {expectedRol: ['admin']}},
   {path: 'user', component: UserComponent, canActivate: [guard], data: {expectedRol: ['user']}},  
   //Redireccionamiento cuando se ingresa una ruta no valida 

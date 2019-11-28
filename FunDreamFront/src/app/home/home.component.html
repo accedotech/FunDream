@@ -7,7 +7,6 @@
 
 
         <p-card>
-
             <div class="idea">
                 <div class="image">
                     <img *ngIf="idea?.principalImage"
@@ -15,14 +14,13 @@
                       height="100%" />
                   </div>
         
-                      <label class="title"> {{idea.name}} </label>
-                    
-                      
+                  <div style="height: 120px">
+                      <label class="title"> {{idea.name}} </label>                                          
                       <p *ngFor="let user of idea.entrepreneurs"> <i class="fa fa-user" aria-hidden="true"></i> {{user.firstName}} {{user.lastName}}  </p> 
                        <p><i class="fa fa-globe" aria-hidden="true"></i>  {{idea.country}}  </p>
-                      
+                  </div>                      
         
-                      <p> {{idea.description}} </p>
+                      <p style="text-align: justify; height: 220px;"> {{idea.description}} </p>
         
                        <p-progressBar [showValue] = "true" [value]="idea.progress"></p-progressBar>
         
@@ -31,9 +29,7 @@
                       <div class="button">
                         <button pButton type="button" icon="fa fa-search-plus" label="Conocer mas"
                           [routerLink]="['/show-idea', idea.id]"></button>
-                      </div>
-                   
-        
+                      </div>                           
             </div>
           </p-card>
 
